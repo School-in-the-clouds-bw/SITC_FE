@@ -19,11 +19,11 @@ After cloning the repo, cd into the sitc folder then run  `npm i` to install the
 ## Dependencies
 
 **Axios**  - handles our HTTP request  
-**Styled Components**  - used for styling the app  
-**Redux**  - handles application state 
-**React**  - the main framework used to build the app 
-**Yup** - Form Authentication
-**React-Router** Handles our routes
+**Styled Components**  - used for styling the app   
+**Redux**  - handles application state   
+**React**  - the main framework used to build the app   
+**Yup** - Form Authentication  
+**React-Router** Handles our routes  
 
 ## Documentation
 
