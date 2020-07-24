@@ -7,42 +7,10 @@ The aim is to help close the achievement gap by connecting students with availab
 
 ##  Meet The Team
 
-Ian Tucker
-
-Asha Gross
-
-Joshua Gralewski
-
-Chris Forrest
-
-Charlene Johnson
-
-Cobrettie Garner
-
-[![Imgur](https://i.imgur.com/BD6cSkA.png)](https://imgur.com/BD6cSkA)
-
-[![Imgur](https://i.imgur.com/35KSoYO.png)](https://imgur.com/35KSoYO)
-
-[![Imgur](https://i.imgur.com/IkXkmTr.jpg)](https://imgur.com/IkXkmTr)
-
-[![Imgur](https://i.imgur.com/fFCNnrY.jpg)](https://imgur.com/fFCNnrY)
-
-[![Imgur](https://i.imgur.com/dYiTREs.jpg)](https://imgur.com/dYiTREs)
-
-[
-![Imgur](https://i.imgur.com/fTxagWj.jpg)](https://imgur.com/fTxagWj)
-
-[Github](https://github.com/Iandecisiv)
-
-[Github](https://github.com/ashagross)
-
-[Github](https://github.com/jgralews3)
-
-[Github](https://github.com/Chris-Forrest)
-
-[Github](https://github.com/charlene-johnson)
-
-[Github](https://github.com/Cobrettie)
+| Ian Tucker | Asha Gross | Joshua Gralewski | Chris Forrest | Charlene Johnson | Cobriette Garner |
+|:--:|:--:|:--:|:--:|:--:|:--:|
+|![Imgur](https://i.imgur.com/BD6cSkA.png)|![Imgur](https://i.imgur.com/35KSoYO.png)|![Imgur](https://i.imgur.com/IkXkmTr.jpg)|![Imgur](https://i.imgur.com/fFCNnrY.jpg)|![Imgur](https://i.imgur.com/dYiTREs.jpg)|![Imgur](https://i.imgur.com/fTxagWj.jpg)|
+| [Github](https://github.com/Iandecisiv)|[Github](https://github.com/ashagross)|[Github](https://github.com/jgralews3)|  [Github](https://github.com/Chris-Forrest)  |[Github](https://github.com/charlene-johnson)|[Github](https://github.com/Cobrettie)
 
 ## Getting Started
 
