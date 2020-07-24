@@ -29,6 +29,6 @@ After cloning the repo, cd into the sitc folder then run  `npm i` to install the
 **Yup** - Form Authentication
 **React-Router** Handles our routes
 
-## Documentation
+## Documentation 
 
 See  [Product Vision Document](https://docs.google.com/document/d/1GMZxWpa89wWbfL-hQ887QK5dGVn8he1Xk4ZmV6bRPGU/edit)  for details on our Product Vision Document
