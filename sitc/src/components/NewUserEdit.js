@@ -7,7 +7,7 @@ export default function NewUserEdit() {
     dayAvailable: "",
     timeAvailable: "",
   });
-  const [addInfo, setAddInfo] = useState();
+  
   const changeHandler = (e) => {
     setInfo({
       ...info,
@@ -21,10 +21,12 @@ export default function NewUserEdit() {
       .post("", setInfo)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
+      setInfo({country: ""})
   };
   const addDayTime = (e) => {
     e.preventDefault();
-    axiosWithAuth().post("", setAddInfo).then().catch();
+    setInfo({dayAvailable:"", timeAvailable: ""})
+    axiosWithAuth().post("", setInfo).then().catch();
   };
 
   return (
@@ -62,7 +64,7 @@ export default function NewUserEdit() {
           <input
             type="text"
             name="timeAvailable"
-            placeholder="Enter time (1:00pm-2pm)"
+            placeholder="Enter time ex:(1:00pm-2pm)"
             value={info.timeAvailable}
             onChange={changeHandler}
           />
