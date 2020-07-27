@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TaskCard from './TaskCard';
 
 const initialFormValues = {
     taskName:'',
@@ -11,28 +12,26 @@ export default function AdminDashboard() {
     const [ fillOutForm, setFillOutForm ] = useState(initialFormValues);
     const [ showTasks, setShowTasks ] = useState(false);
 
-    const expandForm = () =>{
+    const expandForm = e =>{
+        e.preventDefault();
         setExpand(true);
         setFillOutForm()
     };
 
     const submitNewTask = e => {
+        e.preventDefault();
         setExpand(false);
         setFillOutForm(initialFormValues);
     }
 
-    const getTasks = () => {
-        setShowTasks(true);
+    const getTasks = e => {
+        e.preventDefault();
+        
     }
 
-    const editTask = () => {
-        setShowTasks(false)
+    
 
-    }
-
-    const deleteTask = () => {
-
-    }
+   
 
     return (
         <div >
@@ -61,11 +60,13 @@ export default function AdminDashboard() {
         )}
         {showTasks && (
             <div className='tasks'>
+
+                 < TaskCard   />
+
                 <h2>Current Tasks</h2>
                 <ul>
-                    <li>we will map tasks from the backend and make a list using the taskId which will probaly be Date.now()</li>
-                    <li>if admin wants to edit the task they will be pushed to the edit task or it will bring up the edit task component</li>
-                    <li>or it will bring up a form on this page to edit the task i'm undecided</li>
+                    <li>this will be removed after actions and reducers are setup</li>
+                   
                     <button>Edit Task</button>
                     <button onClick={() => setShowTasks(false)}>Cancel</button>
                     <button>Delete</button>
