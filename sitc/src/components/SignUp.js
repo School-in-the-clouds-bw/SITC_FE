@@ -5,6 +5,7 @@ import axios from "axios";
 const SignUp = () => {
     const defaultState = {
         name: "",
+        password: "",
         email: "",
         password: "",
         role: "",
@@ -18,6 +19,7 @@ const SignUp = () => {
 
     const formSchema = yup.object().shape({
         name: yup.string().required("Please Enter Name").min(2, "Name must be at least two characters"),
+        username: yup.string().required("Please Enter Username").min(3, "Username must be at least three characters"),
         email: yup.string().required("Please Enter Email").email("Please Enter Valid Email"),
         password: yup.string().required("Please Enter Password").min(7, "Password must be at least seven characters"),
         role: yup.string().required("Please Select Role").min(5),
@@ -71,6 +73,7 @@ const SignUp = () => {
         <div>
             <form onSubmit={submitHandler}>
                 <label htmlFor="name">Name:<input type="text" name="name" onChange={changeHandler} placeholder="Name"></input>{errors.length !== 0 && <p>{errors.name}</p>}</label>
+                <label htmlFor="username">Username:<input type="text" name="username" onChange={changeHandler} placeholder="Username"></input>{errors.length !== 0 && <p>{errors.name}</p>}</label>
                 <label htmlFor="email">Email:<input type="text" name="email" onChange={changeHandler} placeholder="Email"></input>{errors.length !== 0 && <p>{errors.email}</p>}</label>
                 <label htmlFor="password">Password:<input type="password" name="password" onChange={changeHandler} placeholder="Password"></input>{errors.length !== 0 && <p>{errors.password}</p>}</label>
                 <label htmlFor="role">Role: <select name="role" onChange={changeHandler}>
