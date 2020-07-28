@@ -48,6 +48,10 @@ const Button = styled.button`
   border-radius: 4px;
   font-size: 1.5rem;
   margin-top: 2%;
+
+  &:hover {
+    filter:brightness(1.20);
+  }
 `;
 
 const Lists = styled.div`

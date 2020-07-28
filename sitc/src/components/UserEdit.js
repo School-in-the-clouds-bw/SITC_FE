@@ -2,6 +2,54 @@ import React, { useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import DayList from './DayList';
 import TimeList from './TimeList';
+import styled from 'styled-components';
+
+const Button = styled.button`
+  width: 150px;
+  padding: 8px;
+  background-color: #9fe2bf;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  margin-top: 2%;
+
+  &:hover {
+    filter:brightness(1.20);
+  }
+`;
+
+const Label = styled.label `
+    margin-bottom: -34px;
+    text-align: left;
+    width: 38rem;
+    font-size: 2rem;
+    
+`
+const Input = styled.input `
+    width: 200px;
+    padding: 8px 26px;
+    margin: 8.5px;
+    border: 1px solid #E3A69F;
+    border-radius: 4px;
+    font-size: 1.2rem;
+`
+const InputTime = styled.input `
+    width: 250px;
+    padding: 8px 26px;
+    margin: 8.5px;
+    border: 1px solid #E3A69F;
+    border-radius: 4px;
+    font-size: 1.2rem;
+`
+
+const Select = styled.select `
+    width: 260px;
+    padding: 8px 26px;
+    margin: 8.5px;
+    border: 1px solid #E3A69F;
+    border-radius: 4px;
+    font-size: 1.3rem;
+`
 
 export default function UserEdit(props) {
   const [info, setInfo] = useState({
@@ -51,8 +99,8 @@ export default function UserEdit(props) {
         {expandCountry && (
           <div className="formContainer">
             <form onSubmit={handleSubmit}>
-              <label>Country</label>
-              <input
+              <Label>Country: </Label>
+              <Input
                 type="text"
                 name="country"
                 placeholder="Enter your Country"
@@ -63,7 +111,7 @@ export default function UserEdit(props) {
             <button onClick={() => setExpandCountry(false)}>Cancel</button>
           </div>
         )}
-        <button onClick={() => setExpandCountry(true)}>Edit Country</button>
+        <Button onClick={() => setExpandCountry(true)}>Edit Country</Button>
         
       </div>
       <div className="sections">
@@ -71,8 +119,8 @@ export default function UserEdit(props) {
         {expandDay && (
           <div className="formContainer">
             <form onSubmit={handleSubmit}>
-              <label>Days Available</label>
-              <select
+              <Label>Days Available: </Label>
+              <Select
                 name="dayAvailable"
                 value={info.dayAvailable}
                 onChange={changeHandler}
@@ -85,7 +133,7 @@ export default function UserEdit(props) {
                 <option value="Wednesday">Wednesday</option>
                 <option value="Thursday">Thursday</option>
                 <option value="Friday">Friday</option>
-              </select>
+              </Select>
               
               <button onClick={submitDay}>Add</button>
               <DayList addNewDay={props.addNewDay} />
@@ -93,15 +141,15 @@ export default function UserEdit(props) {
             <button onClick={() => setExpandDay(false)}>Cancel</button>
           </div>
         )}
-        <button onClick={() => setExpandDay(true)}>Change Day</button>
+        <Button onClick={() => setExpandDay(true)}>Change Day</Button>
       </div>
       <div className="sections">
         <h4>Time(s) Available: </h4>
         {expandTime && (
           <div className="formContainer">
             <form onSubmit={handleSubmit}>
-              <label>Time Available</label>
-              <input
+              <Label>Time Available: </Label>
+              <InputTime
                 type="text"
                 name="timeAvailable"
                 placeholder="Enter time ex:(1:00pm-2pm)"
@@ -114,9 +162,9 @@ export default function UserEdit(props) {
             <button onClick={() => setExpandTime(false)}>Cancel</button>
           </div>
         )}
-        <button onClick={() => setExpandTime(true)}>Set Time</button>
+        <Button onClick={() => setExpandTime(true)}>Set Time</Button>
       </div>
-      <button onClick={handleSubmit}>Update Profile</button>
+      <Button onClick={handleSubmit}>Update Profile</Button>
     </>
   );
 }
