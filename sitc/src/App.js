@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import VolunteerDash from './components/VolunteerDash';
 import './App.css';
 
@@ -10,12 +10,24 @@ import AdminDashboard from './components/AdminDashboard';
 
 
 function App() {
+
+  const [addNewDay, setAddNewDay] = useState([])
+
+  const addDayTime = (e, day) => {
+    e.preventDefault()
+    const newDayTime = {
+      day: day
+    }
+    setAddNewDay({
+      addNewDay: [ addNewDay, newDayTime]
+    })
+  } 
   return (
     <div className="App">
 
       <Router>
       <VolunteerDash/>
-      <UserEdit/>
+      <UserEdit addDayTime={addDayTime}/>
       {/* <Route exact path="/editprofile" component={UserEdit}/> */}
       </Router>
 

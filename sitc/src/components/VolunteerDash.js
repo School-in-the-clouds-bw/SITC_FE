@@ -25,7 +25,7 @@ export default function VolunteerDash() {
         </Link>
       </div>
       <div className="profilecard">
-        <h4>Country: </h4>
+        <h4>Country:</h4>
         <h4>Days Available: </h4>
         <h4>Times Available: </h4>
       </div>
