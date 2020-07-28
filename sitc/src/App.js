@@ -1,39 +1,34 @@
-import React, {useState} from 'react';
-import VolunteerDash from './components/VolunteerDash';
-import './App.css';
+import React, { useState } from "react";
+import VolunteerDash from "./components/VolunteerDash";
+import "./App.css";
 
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import UserEdit from './components/UserEdit'
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import UserEdit from "./components/UserEdit";
 
-import Login from './components/Login'
-import AdminDashboard from './components/AdminDashboard';
-
+import Login from "./components/Login";
+import AdminDashboard from "./components/AdminDashboard";
 
 function App() {
+  const [addNewDay, setAddNewDay] = useState([]) 
+  const [addNewTime, setAddNewTime] = useState([])
 
-  const [addNewDay, setAddNewDay] = useState([])
+  const addDay = (newDay) => {
+    setAddNewDay([...addNewDay, newDay]);
+  };
 
-  const addDayTime = (e, day) => {
-    e.preventDefault()
-    const newDayTime = {
-      day: day
-    }
-    setAddNewDay({
-      addNewDay: [ addNewDay, newDayTime]
-    })
-  } 
+  const addTime =(newTime) => {
+    setAddNewTime([...addNewTime, newTime])
+  }
   return (
     <div className="App">
-
       <Router>
-      <VolunteerDash/>
-      <UserEdit addDayTime={addDayTime}/>
-      {/* <Route exact path="/editprofile" component={UserEdit}/> */}
+        <VolunteerDash />
+        <UserEdit addDay={addDay} addNewDay={addNewDay} addTime={addTime} addNewTime={addNewTime}/>
+        {/* <Route exact path="/editprofile" component={UserEdit}/> */}
       </Router>
 
       <Login />
       <AdminDashboard />
-
     </div>
   );
 }

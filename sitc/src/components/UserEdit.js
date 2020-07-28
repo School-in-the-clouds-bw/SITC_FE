@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import DayList from './DayList';
+import TimeList from './TimeList';
 
 export default function UserEdit(props) {
   const [info, setInfo] = useState({
+    id: Date.now(),
     country: "",
     dayAvailable: "",
     timeAvailable: "",
@@ -26,14 +29,18 @@ export default function UserEdit(props) {
       .catch((err) => console.log(err));
     setInfo({ country: "" });
   };
-  const submitDayTime = e => {
+  const submitDay = e => {
     e.preventDefault();
-    setInfo({ dayAvailable: "", timeAvailable: "" });
-    props.addDayTime(e, info)
+    props.addDay(info)
+    setInfo({ dayAvailable: "", id: Date.now()});
   };
 
+  const submitTime = e => {
+    e.preventDefault()
+    props.addTime(info)
+    setInfo({timeAvailable: "", id: Date.now()})
+  }
   
-
   return (
     <>
       <div className="title">
@@ -80,8 +87,8 @@ export default function UserEdit(props) {
                 <option value="Friday">Friday</option>
               </select>
               
-              <button onClick={submitDayTime}>Add</button>
-              <p>Days Selected: </p>
+              <button onClick={submitDay}>Add</button>
+              <DayList addNewDay={props.addNewDay} />
             </form>
             <button onClick={() => setExpandDay(false)}>Cancel</button>
           </div>
@@ -101,12 +108,11 @@ export default function UserEdit(props) {
                 value={info.timeAvailable}
                 onChange={changeHandler}
               />
-              <button onClick={submitDayTime}>Add</button>
+              <button onClick={submitTime}>Add</button>
+              <TimeList addNewTime={props.addNewTime} />
             </form>
             <button onClick={() => setExpandTime(false)}>Cancel</button>
-            <p>Times Selected: </p>
           </div>
-          
         )}
         <button onClick={() => setExpandTime(true)}>Set Time</button>
       </div>
