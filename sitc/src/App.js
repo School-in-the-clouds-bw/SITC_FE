@@ -2,8 +2,7 @@ import React from 'react';
 import VolunteerDash from './components/VolunteerDash';
 import './App.css';
 
-import {BrowserRouter as Router} from 'react-router-dom';
-import NewUserEdit from './components/NewUserEdit';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import UserEdit from './components/UserEdit'
 
 import Login from './components/Login'
@@ -16,8 +15,8 @@ function App() {
 
       <Router>
       <VolunteerDash/>
-      <NewUserEdit/>
       <UserEdit/>
+      {/* <Route exact path="/editprofile" component={UserEdit}/> */}
       </Router>
 
       <Login />

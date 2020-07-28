@@ -11,9 +11,12 @@ export default function VolunteerDash() {
         <h2>Tasks</h2>
       </div>
       <div className="taskcard">
-        <h4>Type</h4>
-        <h4>Day</h4>
-        <h4>Time</h4>
+        <h4>Task Name</h4>
+        <h4>Task Description</h4>
+      </div>
+      <div>
+        <p></p>
+        <p></p>
       </div>
       <div className="headings">
         <h2>Profile</h2>
