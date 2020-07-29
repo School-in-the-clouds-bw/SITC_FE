@@ -1,5 +1,26 @@
 import React, { useState } from 'react';
 import TaskCard from './TaskCard';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+import styled from 'styled-components';
+
+const StyledNewTaskForm = styled.form `
+display: flex;
+flex-direction:column;
+border:1px solid rgb(210, 210, 210);
+border-radius: 5px;
+box-shadow: 10px 8px 12px -2px rgb(128, 127, 197);
+margin: 8px;
+padding: 12px;
+background-color: white;
+width: 50%;
+margin-left: 25%;
+align: center;
+`
+
+const StyledButton = styled.button `
+width: 15%;
+margin-left: 40%;
+`
 
 const initialFormValues = {
     taskName:'',
@@ -11,6 +32,8 @@ export default function AdminDashboard() {
     const [ expand, setExpand ] = useState(false);
     const [ fillOutForm, setFillOutForm ] = useState(initialFormValues);
     const [ showTasks, setShowTasks ] = useState(false);
+    const [ taskList, setTaskList ] = useState(initialFormValues);
+    
 
     const expandForm = e =>{
         e.preventDefault();
@@ -20,13 +43,24 @@ export default function AdminDashboard() {
 
     const submitNewTask = e => {
         e.preventDefault();
+        axiosWithAuth()
+            .post('https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks', fillOutForm)
+            .then( res => {
+                
+            })
         setExpand(false);
         setFillOutForm(initialFormValues);
     }
 
     const getTasks = e => {
         e.preventDefault();
-        
+        axiosWithAuth()
+            .get('https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks')
+            .then( res => {
+                setTaskList(res.data)
+                console.log('get tasks axios call res.data',res.data)
+            })
+            .catch( err => console.log('error getting task list ', err))
     }
 
     
@@ -35,42 +69,38 @@ export default function AdminDashboard() {
 
     return (
         <div >
+            <h2>Admin Dashboard</h2>
         <button onClick={() => setExpand(true)}>Create New Task</button>
-        <button onClick={() => setShowTasks(true)}>Edit Existing Task</button>
+        <button onClick={() => setShowTasks(true)} >Edit Existing Task</button>
         {expand && (
-            <form onSubmit={submitNewTask}>
+            <StyledNewTaskForm onSubmit={submitNewTask}>
                 <h2>Make A New Task</h2>
-                <label>Task Name:
+                <label>Task Name:   </label>
                     <input 
                     onChange={e => 
                     setFillOutForm({...fillOutForm, taskName:e.target.value})}
                     value={fillOutForm.taskName}
                     />
-                </label>
-                <label>Task Description:
+              
+                <label>Task Description:</label>
                     <input
                     onChange={e =>
                     setFillOutForm({...fillOutForm, taskDescription:e.target.value})}
                     value={fillOutForm.taskDescription}
                     />
-                    <button type='submit'>Save</button>
-                    <button onClick={() => setExpand(false)}>Cancel</button>
-                </label>
-            </form>
+                    
+                    <StyledButton type='submit'>Save</StyledButton>
+                    <StyledButton onClick={() => setExpand(false)}>Cancel</StyledButton>
+                
+            </StyledNewTaskForm>
         )}
         {showTasks && (
             <div className='tasks'>
 
-                 < TaskCard   />
-
-                <h2>Current Tasks</h2>
-                <ul>
-                    <li>this will be removed after actions and reducers are setup</li>
-                   
-                    <button>Edit Task</button>
-                    <button onClick={() => setShowTasks(false)}>Cancel</button>
-                    <button>Delete</button>
-                </ul>
+                 < TaskCard  taskList={taskList} updateTaskList={setTaskList} />
+                
+                    <button onClick={() => setShowTasks(false)}>Hide</button>
+                    
             </div>
         )}
         </div>
