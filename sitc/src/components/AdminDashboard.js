@@ -69,6 +69,7 @@ export default function AdminDashboard() {
 
     return (
         <div >
+            <h2>Admin Dashboard</h2>
         <button onClick={() => setExpand(true)}>Create New Task</button>
         <button onClick={() => setShowTasks(true)} >Edit Existing Task</button>
         {expand && (
