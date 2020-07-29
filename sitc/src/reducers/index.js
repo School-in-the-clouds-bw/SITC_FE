@@ -1,5 +1,9 @@
 const initialState = {
     isFetching: false,
+    task:{
+        taskName:'',
+        taskDescription:''
+    },
     admin:'',
     volunteer:'',
     student:'',
