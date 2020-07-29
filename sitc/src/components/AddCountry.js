@@ -9,8 +9,9 @@ const DeleteButton = styled.button`
   border: none;
   border-radius: 4px;
   font-size: 1.2rem;
-  margin-top: 4.7%;
+  margin-top: 4.5%;
   height: 35px;
+
   
 
   &:hover {
@@ -18,28 +19,29 @@ const DeleteButton = styled.button`
   }
 `;
 
-const Times = styled.div `
+const Country = styled.div `
 display: flex;
 justify-content: space-evenly;
 margin-left: 15%;
-margin-right: 20%;
+margin-right: 30%;
 margin-top: 2%;
 `
 
 const Paragraph = styled.p `
 height: 12px;
 padding: 3%;
+max-width: 100px;
 `
 
-export default function TimeList(props) {
+export default function AddCountry(props) {
   return (
     <div>
-      {props.addNewTime &&
-        props.addNewTime.map((times) => (
-          <Times key={times.id}>
-            <Paragraph>Time Added: {times.timeAvailable}</Paragraph>
+      {props.addNewCountry &&
+        props.addNewCountry.map((countries) => (
+          <Country key={countries.id}>
+            <Paragraph>Country: {countries.country}</Paragraph>
             <DeleteButton>Delete</DeleteButton>
-          </Times>
+          </Country>
         ))}
     </div>
   );
