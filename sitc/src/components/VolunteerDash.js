@@ -50,7 +50,7 @@ const Button = styled.button`
   margin-top: 2%;
 
   &:hover {
-    filter:brightness(1.20);
+    filter: brightness(1.2);
   }
 `;
 

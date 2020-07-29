@@ -252,9 +252,8 @@ export default function UserEdit(props) {
                     Cancel
                   </CancelButton>
                 </CancelAdd1>
-                
+
                 <DayList addNewDay={props.addNewDay} />
-                
               </FormContainer>
             )}
             <Button onClick={() => setExpandDay(true)}>Change Day</Button>

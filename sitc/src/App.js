@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import VolunteerDash from "./components/VolunteerDash";
 import "./App.css";
-
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import UserEdit from "./components/UserEdit";
-
+import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import UserEdit from './components/UserEdit'
+import EditTask from './components/EditTask';
+import PrivateRoute from './components/PrivateRoute';
+import SignUp from './components/SignUp';
 import Login from "./components/Login";
 import AdminDashboard from "./components/AdminDashboard";
 
@@ -29,13 +30,32 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {/* <VolunteerDash /> */}
-        <UserEdit addDay={addDay} addNewDay={addNewDay} addTime={addTime} addNewTime={addNewTime} addCountry={addCountry} addNewCountry={addNewCountry}/>
-        {/* <Route exact path="/editprofile" component={UserEdit}/> */}
-      </Router>
 
-      {/* <Login />
-      <AdminDashboard /> */}
+        <VolunteerDash />
+        <UserEdit addDay={addDay} addNewDay={addNewDay} addTime={addTime} addNewTime={addNewTime}/>
+        {/* <Route exact path="/editprofile" component={UserEdit}/> */}
+      
+      <Login />
+      <AdminDashboard />
+
+        <h1>Welcome to School In The Clouds</h1>
+     {/* <VolunteerDash/>
+      <NewUserEdit/>
+     <UserEdit/> */}
+      <Link to='/login'>Login</Link>
+      <Link  to='/signUp'>Sign Up</Link>
+      {/*<AdminDashboard />
+      <EditTask /> */}
+
+      <Switch>
+        <PrivateRoute exact path='/volunteerDash' component={ VolunteerDash} />
+        <PrivateRoute exact path='/userEdit' component={ UserEdit} />
+        <PrivateRoute exact path='/adminDashboard' component={ AdminDashboard} />
+        <PrivateRoute exact path='/editTask' component={ EditTask } />
+        <Route path='/login' component={Login} />
+        <Route path='/signUp' component={ SignUp } />
+      </Switch>
+      </Router>
     </div>
   );
 }
