@@ -10,10 +10,11 @@ const SignUp = () => {
         password: "",
         role: "",
        // terms: false
+
     }
 
     const [formState, setFormState] = React.useState(defaultState);
-    const [errors, setErrors] = React.useState({...defaultState, terms:""});
+    const [errors, setErrors] = React.useState({...defaultState});
     const [newUser, setNewUser] = React.useState([]);
     const [buttonDisabler, setDisabler] = React.useState(true);
 
@@ -24,6 +25,8 @@ const SignUp = () => {
         password: yup.string().required("Please Enter Password").min(7, "Password must be at least seven characters"),
         role: yup.string().required("Please Select Role").min(5),
        // terms: yup.boolean().oneOf([true], "Please Accept Terms and Conditions")
+        role: yup.string().required("Please Select Role").min(5)
+
     })
 
     const validateChange = e => {
@@ -84,6 +87,7 @@ const SignUp = () => {
                 </select>{errors.length !== 0 && <p>{errors.role}</p>}</label>
                {// <label htmlFor="terms"><input type="checkbox" name="terms" onChange={changeHandler} />I accept the Terms and Conditions </label>}
 }
+
                 <button name="submit" disabled={buttonDisabler}>Sign Up!</button>
             </form>
                     </div>

@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import VolunteerDash from "./components/VolunteerDash";
 import "./App.css";
 
-
-
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
-//import NewUserEdit from './components/NewUserEdit';
+// import NewUserEdit from './components/NewUserEdit';
 import UserEdit from './components/UserEdit'
 
 import Login from './components/Login'
@@ -14,7 +12,7 @@ import EditTask from './components/EditTask';
 import PrivateRoute from './components/PrivateRoute';
 import SignUp from './components/SignUp';
 import styled from 'styled-components';
-
+import StudentDash from './components/StudentDash';
 
 
 
@@ -48,13 +46,15 @@ const addCountry= (newCountry) => {
       <Link to='/volunteerDash'>Volunteer Dashboard</Link>
       <Link to='/userEdit'>Volunteer Edit Profile</Link>
       <Link to='/editTask'>Edit Task</Link>
+      <Link to='/studentDashboard'>Student Test</Link>
       
 
       <Switch>
         <PrivateRoute exact path='/volunteerDash' component={ VolunteerDash} />
-       
+        {/* <PrivateRoute exact path='/newUserEdit' component={ NewUserEdit} /> */}
         <PrivateRoute exact path='/userEdit' component={ UserEdit} />
         <PrivateRoute exact path='/adminDashboard' component={ AdminDashboard} />
+        <Route exact path='/studentDashboard' component={ StudentDash} />
         <PrivateRoute exact path='/editTask' component={ EditTask } />
         <PrivateRoute exact path='/userEdit' component={ UserEdit }  addDay={addDay} addNewDay={addNewDay}
           addTime={addTime} addNewTime={addNewDay} addCountry={addCountry} addNewCountry={addNewCountry} />
