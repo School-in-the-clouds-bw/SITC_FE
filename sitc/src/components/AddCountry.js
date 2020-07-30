@@ -5,11 +5,8 @@ import styled from 'styled-components';
 
 
 const Country = styled.div `
-display: flex;
-justify-content: space-evenly;
-margin-left: 15%;
-margin-right: 30%;
-margin-top: 2%;
+
+width: 200px;
 `
 
 const Paragraph = styled.p `

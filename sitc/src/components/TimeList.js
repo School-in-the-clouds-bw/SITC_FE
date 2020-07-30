@@ -24,9 +24,8 @@ const DeleteButton = styled.button`
 const Times = styled.div `
 display: flex;
 justify-content: space-evenly;
-margin-left: 15%;
-margin-right: 20%;
-margin-top: 2%;
+width: 500px;
+
 `
 
 const Paragraph = styled.p `
@@ -41,7 +40,7 @@ export default function TimeList(props) {
         props.addNewTime.map((times) => (
           <Times key={times.id}>
             <Paragraph>Time Added: {times.timeAvailable}</Paragraph>
-            <DeleteButton>Delete</DeleteButton>
+            <DeleteButton type="button">Delete</DeleteButton>
           </Times>
         ))}
     </div>

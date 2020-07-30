@@ -45,7 +45,9 @@ const FormSection3 = styled.div`
   margin-right: 36%;
 `;
 
-
+const Title = styled.div `
+color: #96534b;
+`
 const Cards = styled.div`
   margin: 1%;
   box-shadow: 0 5px 10px rgba(104, 113, 88, 0.12),
@@ -221,9 +223,9 @@ export default function UserEdit(props) {
   return (
     <>
       <Container>
-        <div className="title">
+        <Title>
           <h1>Edit Profile</h1>
-        </div>
+        </Title>
         <Cards>
           <Forms onSubmit={handleSubmit}>
             <Sections>

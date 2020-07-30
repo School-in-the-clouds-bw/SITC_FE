@@ -1,17 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import Loader from "react-loader-spinner";
 
-
 const Container = styled.div`
   width: 100%;
 `;
 
-const Title = styled.div `
-color: #96534b;
-`
+const Title = styled.div`
+  color: #96534b;
+`;
 const Headings = styled.div`
   text-align: left;
   margin-left: 2%;
@@ -36,7 +35,7 @@ const Cards = styled.div`
   padding: 3%;
   background-color: #ccffe5;
   color: #96534b;
-  `
+`;
 
 const CardsProfile = styled.div`
   margin: 1%;
@@ -45,7 +44,7 @@ const CardsProfile = styled.div`
   border-radius: 8px;
   width: 80;
   padding: 2%;
-   background-color: #ccffe5;
+  background-color: #ccffe5;
   color: #96534b;
   display: flex;
   flex-direction: column;
@@ -56,7 +55,7 @@ const Button = styled.button`
   width: 140px;
   padding: 8px;
   background-color: #ccffe5;
-  border: 1px solid  #96534b;
+  border: 1px solid #96534b;
   color: #96534b;
   border-radius: 4px;
   font-size: 1.5rem;
@@ -81,28 +80,28 @@ const Descriptions = styled.div`
   flex-wrap: wrap;
 `;
 
-const Paragraph = styled.p `
-text-align: center;
-margin-left: 2%;
-`
+const Paragraph = styled.p`
+  text-align: center;
+  margin-left: 2%;
+`;
 
 export default function VolunteerDash(props) {
+  const id = window.localStorage.getItem("id");
 
-  const id = window.localStorage.getItem('id')
-
-  const [seeTask, setSeeTask] = useState([])
-   
+  const [seeTask, setSeeTask] = useState([]);
+  
   useEffect(() => {
     const getData = () => {
       axiosWithAuth()
-      .get("https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks")
-      .then(res => {
-        setSeeTask(res.data)
-      })
-      .catch(err => console.log(err))
-    }
-    getData()
-  })
+        .get("https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks")
+        .then((res) => {
+          setSeeTask(res.data);
+        })
+        .catch((err) => console.log(err));
+    };
+    getData();
+  });
+
   return (
     <Container>
       <Title>
@@ -116,25 +115,23 @@ export default function VolunteerDash(props) {
           <h4>Task Name</h4>
           <h4>Task Description</h4>
         </Lists>
-       
-          {seeTask.map((task, key) => {
-            return(
-              <>
+
+        {seeTask.map((task, key) => {
+          return (
+            <>
               {props.fetchingData && (
                 <div className="key spinner">
                   <Loader type="Puff" color="#96534b" height="60" width="60" />
                   <p>Loading Data</p>
                 </div>
-              )} 
+              )}
               <Descriptions key={key}>
                 <Paragraph>{task.taskName}</Paragraph>
                 <Paragraph>{task.taskDescription}</Paragraph>
               </Descriptions>
-              </>
-            )
-          })}
-          
-        
+            </>
+          );
+        })}
       </Cards>
       <HeadingsPro>
         <h2>Profile</h2>
@@ -143,9 +140,9 @@ export default function VolunteerDash(props) {
         </Link>
       </HeadingsPro>
       <CardsProfile>
-        <h4>Country: {props.country}</h4>
-        <h4>Days Available: {props.daysAvailable}</h4>
-        <h4>Times Available{props.timeAvailable} </h4>
+        <h4>Country: </h4>
+        <h4>Days Available: </h4>
+        <h4>Times Available: </h4>
       </CardsProfile>
     </Container>
   );
