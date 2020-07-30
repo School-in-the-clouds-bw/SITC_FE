@@ -21,6 +21,7 @@ import styled from 'styled-components';
 function App() {
   const [addNewDay, setAddNewDay] = useState([]) 
   const [addNewTime, setAddNewTime] = useState([])
+  const [addNewCountry, setAddNewCountry ] = useState([])
 
   const addDay = (newDay) => {
     setAddNewDay([...addNewDay, newDay]);
@@ -29,6 +30,12 @@ function App() {
   const addTime =(newTime) => {
     setAddNewTime([...addNewTime, newTime])
   }
+
+const addCountry= (newCountry) => {
+
+ setAddNewCountry([...addNewCountry, newCountry])
+}
+
   return (
     <div className="App">
       <Router>
@@ -37,6 +44,7 @@ function App() {
      
       <Link to='/login'>Login</Link>
       <Link  to='/signUp'>Sign Up</Link>
+      <Link to='/adminDashboard'>Admin Dashboard</Link>
       <Link to='/volunteerDash'>Volunteer Dashboard</Link>
       <Link to='/userEdit'>Volunteer Edit Profile</Link>
       <Link to='/editTask'>Edit Task</Link>
@@ -48,6 +56,8 @@ function App() {
         <PrivateRoute exact path='/userEdit' component={ UserEdit} />
         <PrivateRoute exact path='/adminDashboard' component={ AdminDashboard} />
         <PrivateRoute exact path='/editTask' component={ EditTask } />
+        <PrivateRoute exact path='/userEdit' component={ UserEdit }  addDay={addDay} addNewDay={addNewDay}
+          addTime={addTime} addNewTime={addNewDay} addCountry={addCountry} addNewCountry={addNewCountry} />
         <Route path='/login' component={Login} />
         <Route path='/signUp' component={ SignUp } />
       </Switch>
