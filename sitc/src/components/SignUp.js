@@ -5,11 +5,11 @@ import axios from "axios";
 const SignUp = () => {
     const defaultState = {
         name: "",
-        password: "",
+        username: "",
         email: "",
         password: "",
         role: "",
-        terms: false
+       // terms: false
     }
 
     const [formState, setFormState] = React.useState(defaultState);
@@ -23,7 +23,7 @@ const SignUp = () => {
         email: yup.string().required("Please Enter Email").email("Please Enter Valid Email"),
         password: yup.string().required("Please Enter Password").min(7, "Password must be at least seven characters"),
         role: yup.string().required("Please Select Role").min(5),
-        terms: yup.boolean().oneOf([true], "Please Accept Terms and Conditions")
+       // terms: yup.boolean().oneOf([true], "Please Accept Terms and Conditions")
     })
 
     const validateChange = e => {
@@ -56,7 +56,7 @@ const SignUp = () => {
             e.preventDefault();
             console.log("submitted");
             axios
-              .post("https://reqres.in/api/users", formState)
+              .post("https://school-in-the-cloud-be.herokuapp.com/api/auth/register", formState)
               .then(res => {
                 setNewUser([...newUser, res.data])
                 console.log(newUser)
@@ -82,8 +82,8 @@ const SignUp = () => {
                     <option value="Volunteer">Volunteer</option>
                     <option value="Adminstrator">Administrator</option>
                 </select>{errors.length !== 0 && <p>{errors.role}</p>}</label>
-                <label htmlFor="terms"><input type="checkbox" name="terms" onChange={changeHandler} />I accept the Terms and Conditions </label>
-
+               {// <label htmlFor="terms"><input type="checkbox" name="terms" onChange={changeHandler} />I accept the Terms and Conditions </label>}
+}
                 <button name="submit" disabled={buttonDisabler}>Sign Up!</button>
             </form>
                     </div>
