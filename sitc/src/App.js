@@ -8,6 +8,7 @@ import PrivateRoute from './components/PrivateRoute';
 import SignUp from './components/SignUp';
 import Login from "./components/Login";
 import AdminDashboard from "./components/AdminDashboard";
+import StudentDash from './components/StudentDash';
 
 function App() {
 
@@ -40,6 +41,9 @@ function App() {
   return (
     <div className="App">
       <Router>
+      <Link to='/login'>Login</Link>
+      <Link  to='/signUp'>Sign Up</Link>
+      <Link to='/studentDashboard'>Student Test</Link>
 
         <VolunteerDash />
         <UserEdit addDay={addDay} addNewDay={addNewDay} addTime={addTime} addNewTime={addNewTime} addCountry={addCountry} addNewCountry={addNewCountry}/>
@@ -52,8 +56,7 @@ function App() {
      {/* <VolunteerDash/>
       <NewUserEdit/>
      <UserEdit/> */}
-      <Link to='/login'>Login</Link>
-      <Link  to='/signUp'>Sign Up</Link>
+
       {/*<AdminDashboard />
       <EditTask /> */}
 
@@ -61,6 +64,7 @@ function App() {
         <PrivateRoute exact path='/volunteerDash' component={ VolunteerDash} />
         <PrivateRoute exact path='/userEdit' component={ UserEdit} />
         <PrivateRoute exact path='/adminDashboard' component={ AdminDashboard} />
+        <Route exact path='/studentDashboard' component={ StudentDash} />
         <PrivateRoute exact path='/editTask' component={ EditTask } />
         <Route path='/login' component={Login} />
         <Route path='/signUp' component={ SignUp } />
