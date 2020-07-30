@@ -3,7 +3,8 @@ import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { deleteTaskData } from '../Actions'
+import { useDispatch } from 'react-redux';
 const initialTask = {
     taskName:'',
     taskDescription:''
@@ -27,10 +28,9 @@ width: 15%;
 margin-left: 40%;
 `
 
-const TaskCard = ({ task }) => {
-  
+const TaskCard = ({ task, setShowTasks }) => {
+    const dispatch = useDispatch();
     const history = useHistory();
-    const { id } = useParams();
 
     const editTask = task => {
         history.push('/editTask')
@@ -39,7 +39,9 @@ const TaskCard = ({ task }) => {
    
 
     const deleteTask = e => {
-        e.preventDefault();
+        dispatch(deleteTaskData(task.id))
+        console.log('this is the task id to be deleted',task.id)
+       setShowTasks(false);
     /*    axiosWithAuth()
         .delete(`https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks/${task.id}`)
         .then( res => {

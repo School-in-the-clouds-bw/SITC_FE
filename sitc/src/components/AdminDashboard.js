@@ -98,9 +98,9 @@ const AdminDashboard = ({ isFetching, tasks, error, getTasks}) => {
         )}
         {showTasks && (
             <div className='tasks'>
-                { isFetching && <Loader type="Circles" color="#00bff" height={100} width={100} />}
+                { isFetching && <Loader type="Circles" color="#00bfff" height={100} width={100} />}
                 {tasks.map(task => {
-                    return<TaskCard key={task.id} task={task} />
+                    return<TaskCard key={task.id} task={task} setShowTasks={setShowTasks} />
                 })}
             
                     <button onClick={() => setShowTasks(false)}>Hide</button>

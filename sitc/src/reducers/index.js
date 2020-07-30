@@ -1,4 +1,4 @@
-import { FETCHING_ADMINTASKS_START, FETCHING_ADMINTASKS_SUCCESS, FETCHING_ADMINTASKS_FAILURE } from '../Actions';
+import { FETCHING_ADMINTASKS_START, FETCHING_ADMINTASKS_SUCCESS, FETCHING_ADMINTASKS_FAILURE, ADMIN_DELETE_TASK } from '../Actions';
 
 
 const initialState = {
@@ -26,6 +26,10 @@ export const reducer = (state = initialState, action ) => {
                 ...state,
                 isFetching: false,
                 error:"error retrieving tasks"
+            }
+        case ADMIN_DELETE_TASK:
+            return {
+                ...state
             }
         default:
             return state;
