@@ -54,6 +54,7 @@ export default function AdminDashboard() {
 
     const getTasks = e => {
         e.preventDefault();
+        setShowTasks(true);
         axiosWithAuth()
             .get('https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks')
             .then( res => {
@@ -71,7 +72,7 @@ export default function AdminDashboard() {
         <div >
             <h2>Admin Dashboard</h2>
         <button onClick={() => setExpand(true)}>Create New Task</button>
-        <button onClick={() => setShowTasks(true)} >Edit Existing Task</button>
+        <button onClick={getTasks} >Edit Existing Task</button>
         {expand && (
             <StyledNewTaskForm onSubmit={submitNewTask}>
                 <h2>Make A New Task</h2>

@@ -82,7 +82,7 @@ const Login = () => {
                 </label>
                 <label>
                     Password:
-                    <input type='text' name='password' onChange={handleChange} value={formState.password} />
+                    <input type='password' name='password' onChange={handleChange} value={formState.password} />
                 </label>
                 <button type='submit' disabled={buttonDisabled}>Login</button>
             </form>
