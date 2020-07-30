@@ -205,21 +205,22 @@ export default function UserEdit(props) {
   const submitDay = (e) => {
     e.preventDefault();
     props.addDay(info);
-    setInfo({ daysAvailable: "" });
+    // setInfo({ daysAvailable: "" });
   };
 
   const submitTime = (e) => {
     e.preventDefault();
     props.addTime(info);
-    setInfo({ timeAvailable: "" });
+    // setInfo({ timeAvailable: "" });
   };
 
   const submitCountry = (e) => {
     e.preventDefault();
     props.addCountry(info);
-    setInfo({ country: "" });
+    // setInfo({ country: "" });
   };
 
+  console.log(info)
   return (
     <>
       <Container>
@@ -243,7 +244,7 @@ export default function UserEdit(props) {
                 />
                 </FormSection1>
                 <CancelAdd>
-                  <AddButton onClick={submitCountry}>Add</AddButton>
+                  <AddButton type="button" onClick={submitCountry}>Add</AddButton>
                   <CancelButton onClick={() => setExpandCountry(false)}>
                     Cancel
                   </CancelButton>
@@ -276,7 +277,7 @@ export default function UserEdit(props) {
                 </Select>
                 </FormSection2>
                 <CancelAdd1>
-                  <AddButton onClick={submitDay}>Add</AddButton>
+                  <AddButton type="button" onClick={submitDay}>Add</AddButton>
 
                   <CancelButton onClick={() => setExpandDay(false)}>
                     Cancel
@@ -302,7 +303,7 @@ export default function UserEdit(props) {
                 />
                 </FormSection3>
                 <CancelAdd2>
-                  <AddButton onClick={submitTime}>Add</AddButton>
+                  <AddButton type="button" onClick={submitTime}>Add</AddButton>
                   <CancelButton onClick={() => setExpandTime(false)}>
                     Cancel
                   </CancelButton>

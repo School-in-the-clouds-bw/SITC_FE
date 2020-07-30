@@ -19,8 +19,8 @@ export default function AddCountry(props) {
   return (
     <div>
       {props.addNewCountry &&
-        props.addNewCountry.map((countries) => (
-          <Country key={countries.id}>
+        props.addNewCountry.map((countries, key) => (
+          <Country key={key}>
             <Paragraph>Country: {countries.country}</Paragraph>
           </Country>
         ))}

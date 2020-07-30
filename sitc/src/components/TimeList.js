@@ -37,8 +37,8 @@ export default function TimeList(props) {
   return (
     <div>
       {props.addNewTime &&
-        props.addNewTime.map((times) => (
-          <Times key={times.id}>
+        props.addNewTime.map((times, key) => (
+          <Times key={key}>
             <Paragraph>Time Added: {times.timeAvailable}</Paragraph>
             <DeleteButton type="button">Delete</DeleteButton>
           </Times>
