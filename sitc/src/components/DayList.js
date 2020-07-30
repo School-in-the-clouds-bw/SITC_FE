@@ -34,7 +34,7 @@ export default function DayList(props) {
       {props.addNewDay &&
         props.addNewDay.map((days) => (
           <Days key={days.id}>
-            <Paragraph>Day Selected: {days.dayAvailable}</Paragraph>
+            <Paragraph>Day Selected: {days.daysAvailable}</Paragraph>
             <DeleteButton>Delete</DeleteButton>
           </Days>
         ))}

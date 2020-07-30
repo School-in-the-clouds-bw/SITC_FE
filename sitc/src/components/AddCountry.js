@@ -2,22 +2,7 @@ import React from "react";
 
 import styled from 'styled-components';
 
-const DeleteButton = styled.button`
-  width: 100px;
-  padding: 6px;
-  background-color: #E3A69F;
-  border: none;
-  border-radius: 4px;
-  font-size: 1.2rem;
-  margin-top: 4.5%;
-  height: 35px;
 
-  
-
-  &:hover {
-    filter:brightness(1.20);
-  }
-`;
 
 const Country = styled.div `
 display: flex;
@@ -40,7 +25,6 @@ export default function AddCountry(props) {
         props.addNewCountry.map((countries) => (
           <Country key={countries.id}>
             <Paragraph>Country: {countries.country}</Paragraph>
-            <DeleteButton>Delete</DeleteButton>
           </Country>
         ))}
     </div>

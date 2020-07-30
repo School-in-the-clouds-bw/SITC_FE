@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import {useParams} from 'react-router-dom'
 
 const Container = styled.div`
   width: 100%;
@@ -67,7 +68,7 @@ const Descriptions = styled.div`
 `;
 
 export default function VolunteerDash(props) {
-  const [data, setData] = useState([])
+  const id = window.localStorage.getItem('id')
   return (
     <Container>
       <div className="title">
@@ -88,13 +89,13 @@ export default function VolunteerDash(props) {
       </Cards>
       <HeadingsPro>
         <h2>Profile</h2>
-        <Link to={"/editprofile"}>
+        <Link to={`/userEdit/${id}`}>
           <Button>Edit Profile</Button>
         </Link>
       </HeadingsPro>
       <CardsProfile>
         <h4>Country: {props.country}</h4>
-        <h4>Days Available: {props.dayAvailable}</h4>
+        <h4>Days Available: {props.daysAvailable}</h4>
         <h4>Times Available{props.timeAvailable} </h4>
       </CardsProfile>
     </Container>

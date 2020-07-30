@@ -55,6 +55,7 @@ const Login = () => {
         event.preventDefault();
         axiosWithAuth().post("https://school-in-the-cloud-be.herokuapp.com/api/auth/login", formState)
         .then(response => {
+            window.localStorage.setItem('id', response.data.id)
             window.localStorage.setItem('token', response.data.token)
             window.localStorage.setItem('role', response.data.role)
             console.log(response)
@@ -82,7 +83,7 @@ const Login = () => {
                 </label>
                 <label>
                     Password:
-                    <input type='text' name='password' onChange={handleChange} value={formState.password} />
+                    <input type='password' name='password' onChange={handleChange} value={formState.password} />
                 </label>
                 <button type='submit' disabled={buttonDisabled}>Login</button>
             </form>

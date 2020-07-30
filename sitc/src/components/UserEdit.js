@@ -4,32 +4,21 @@ import DayList from "./DayList";
 import TimeList from "./TimeList";
 import styled from "styled-components";
 import AddCountry from "./AddCountry";
-import { useParams, useHistory} from "react-router-dom"
+import {useHistory } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
 `;
+
 const FormContainer = styled.div`
   margin-bottom: 2%;
 `;
+
 const Forms = styled.form`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   margin: 1%;
-`;
-const Forms1 = styled.form`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  margin-right: 10%;
-`;
-
-const Forms2 = styled.form`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  margin-right: 12%;
 `;
 
 const Cards = styled.div`
@@ -146,17 +135,16 @@ const CancelAdd2 = styled.div`
 
 export default function UserEdit(props) {
   const [info, setInfo] = useState({
-    id: Date.now(),
     country: "",
-    dayAvailable: "",
+    daysAvailable: "",
     timeAvailable: "",
   });
   const [expandCountry, setExpandCountry] = useState(false);
   const [expandDay, setExpandDay] = useState(false);
   const [expandTime, setExpandTime] = useState(false);
 
-  const {push} = useHistory();
-  const {id} = useParams();
+  const { push } = useHistory();
+  const id = window.localStorage.getItem("id");
 
   const changeHandler = (e) => {
     setInfo({
@@ -168,31 +156,33 @@ export default function UserEdit(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`https://school-in-the-cloud-be.herokuapp.com/api/auth/users/${id}`, setInfo)
-      .then(res => {
-        setInfo(res.data)
-        push('/volunteerDash')
+      .put(
+        `https://school-in-the-cloud-be.herokuapp.com/api/auth/users/${id}`,
+        info
+      )
+      .then((res) => {
+        setInfo(res.data);
+        console.log(res.data);
+        push("/volunteerDash");
       })
       .catch((err) => console.log(err));
-      
-      setInfo({ country: "" });
   };
   const submitDay = (e) => {
     e.preventDefault();
     props.addDay(info);
-    setInfo({ dayAvailable: "", id: Date.now() });
+    setInfo({ daysAvailable: "" });
   };
 
   const submitTime = (e) => {
     e.preventDefault();
     props.addTime(info);
-    setInfo({ timeAvailable: "", id: Date.now() });
+    setInfo({ timeAvailable: "" });
   };
 
   const submitCountry = (e) => {
     e.preventDefault();
     props.addCountry(info);
-    setInfo({ country: "", id: Date.now() });
+    setInfo({ country: "" });
   };
 
   return (
@@ -202,57 +192,50 @@ export default function UserEdit(props) {
           <h1>Edit Profile</h1>
         </div>
         <Cards>
-          <Sections>
+          <Forms onSubmit={handleSubmit}>
+            <Sections>
             <h4>Country: </h4>
             {expandCountry && (
               <FormContainer>
-                <Forms onSubmit={handleSubmit}>
-                  <Label>Country: </Label>
-                  <Input
-                    type="text"
-                    name="country"
-                    placeholder="Enter your Country"
-                    value={info.country}
-                    onChange={changeHandler}
-                  />
-                </Forms>
+                <Label>Country</Label>
+                <Input
+                  type="text"
+                  name="country"
+                  placeholder="Enter your Country"
+                  value={info.country}
+                  onChange={changeHandler}
+                />
                 <CancelAdd>
                   <AddButton onClick={submitCountry}>Add</AddButton>
-
                   <CancelButton onClick={() => setExpandCountry(false)}>
                     Cancel
                   </CancelButton>
                 </CancelAdd>
-                <AddCountry addNewCountry={props.addNewCountry} />
               </FormContainer>
             )}
-            <div>
-              <Button onClick={() => setExpandCountry(true)}>
-                Edit Country
-              </Button>
-            </div>
-          </Sections>
-          <Sections>
+            <p>Stuff</p>
+            <AddCountry addNewCountry={props.addNewCountry} />
+            <Button onClick={() => setExpandCountry(true)}>Edit Country</Button>
+            </Sections>
+            <Sections>
             <h4>Day(s) Available: </h4>
             {expandDay && (
               <FormContainer>
-                <Forms1 onSubmit={handleSubmit}>
-                  <Label>Days Available: </Label>
-                  <Select
-                    name="dayAvailable"
-                    value={info.dayAvailable}
-                    onChange={changeHandler}
-                  >
-                    <option value="" disabled={true}>
-                      Select day of Week
-                    </option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                  </Select>
-                </Forms1>
+                <Label>Days Available: </Label>
+                <Select
+                  name="daysAvailable"
+                  value={info.daysAvailable}
+                  onChange={changeHandler}
+                >
+                  <option value="" disabled={true}>
+                    Select day of Week
+                  </option>
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                </Select>
                 <CancelAdd1>
                   <AddButton onClick={submitDay}>Add</AddButton>
 
@@ -260,40 +243,39 @@ export default function UserEdit(props) {
                     Cancel
                   </CancelButton>
                 </CancelAdd1>
-
-                <DayList addNewDay={props.addNewDay} />
               </FormContainer>
             )}
+            <DayList addNewDay={props.addNewDay} />
             <Button onClick={() => setExpandDay(true)}>Change Day</Button>
-          </Sections>
-          <Sections>
+            </Sections>
+            <Sections>
             <h4>Time(s) Available: </h4>
             {expandTime && (
               <FormContainer>
-                <Forms2 onSubmit={handleSubmit}>
-                  <Label>Time Available: </Label>
-                  <InputTime
-                    type="text"
-                    name="timeAvailable"
-                    placeholder="Enter time ex:(1:00pm-2pm)"
-                    value={info.timeAvailable}
-                    onChange={changeHandler}
-                  />
-                </Forms2>
+                <Label>Time Available: </Label>
+                <InputTime
+                  type="text"
+                  name="timeAvailable"
+                  placeholder="Enter time ex:(1:00pm-2pm)"
+                  value={info.timeAvailable}
+                  onChange={changeHandler}
+                />
                 <CancelAdd2>
                   <AddButton onClick={submitTime}>Add</AddButton>
-
                   <CancelButton onClick={() => setExpandTime(false)}>
                     Cancel
                   </CancelButton>
                 </CancelAdd2>
-                <TimeList addNewTime={props.addNewTime} />
               </FormContainer>
             )}
+            <TimeList addNewTime={props.addNewTime} />
             <Button onClick={() => setExpandTime(true)}>Set Time</Button>
-          </Sections>
+            </Sections>
+          </Forms>
         </Cards>
-        <Button onClick={handleSubmit}>Update Profile</Button>
+        <Button type="submit" onClick={handleSubmit}>
+          Update Profile
+        </Button>
       </Container>
     </>
   );
