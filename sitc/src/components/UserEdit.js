@@ -4,6 +4,7 @@ import DayList from "./DayList";
 import TimeList from "./TimeList";
 import styled from "styled-components";
 import AddCountry from "./AddCountry";
+import { useParams, useHistory} from "react-router-dom"
 
 const Container = styled.div`
   width: 100%;
@@ -154,6 +155,9 @@ export default function UserEdit(props) {
   const [expandDay, setExpandDay] = useState(false);
   const [expandTime, setExpandTime] = useState(false);
 
+  const {push} = useHistory();
+  const {id} = useParams();
+
   const changeHandler = (e) => {
     setInfo({
       ...info,
@@ -164,10 +168,14 @@ export default function UserEdit(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post("", setInfo)
-      .then((res) => console.log(res))
+      .put(`https://school-in-the-cloud-be.herokuapp.com/api/auth/users/${id}`, setInfo)
+      .then(res => {
+        setInfo(res.data)
+        push('/volunteerDash')
+      })
       .catch((err) => console.log(err));
-    setInfo({ country: "" });
+      
+      setInfo({ country: "" });
   };
   const submitDay = (e) => {
     e.preventDefault();
@@ -235,7 +243,7 @@ export default function UserEdit(props) {
                     value={info.dayAvailable}
                     onChange={changeHandler}
                   >
-                    <option value="" diabled={true}>
+                    <option value="" disabled={true}>
                       Select day of Week
                     </option>
                     <option value="Monday">Monday</option>

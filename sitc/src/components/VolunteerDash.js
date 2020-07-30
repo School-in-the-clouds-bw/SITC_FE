@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -66,7 +66,8 @@ const Descriptions = styled.div`
   flex-wrap: wrap;
 `;
 
-export default function VolunteerDash() {
+export default function VolunteerDash(props) {
+  const [data, setData] = useState([])
   return (
     <Container>
       <div className="title">
@@ -92,9 +93,9 @@ export default function VolunteerDash() {
         </Link>
       </HeadingsPro>
       <CardsProfile>
-        <h4>Country:</h4>
-        <h4>Days Available: </h4>
-        <h4>Times Available: </h4>
+        <h4>Country: {props.country}</h4>
+        <h4>Days Available: {props.dayAvailable}</h4>
+        <h4>Times Available{props.timeAvailable} </h4>
       </CardsProfile>
     </Container>
   );

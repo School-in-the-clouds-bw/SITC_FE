@@ -10,10 +10,20 @@ import Login from "./components/Login";
 import AdminDashboard from "./components/AdminDashboard";
 
 function App() {
+
+  // const [data, setData] = useState({
+  //   country: '',
+  //   days: '',
+  //   times: ''
+  // })
   const [addNewDay, setAddNewDay] = useState([]) 
   const [addNewTime, setAddNewTime] = useState([])
 
   const [addNewCountry, setAddNewCountry] = useState([])
+
+  // const addData = (newData) => {
+  //   setData([...data, newData])
+  // }
 
   const addDay = (newDay) => {
     setAddNewDay([...addNewDay, newDay]);
@@ -24,7 +34,7 @@ function App() {
   };
 
   const addCountry =(newCountry) => {
-    setAddNewCountry([...addNewCountry, newCountry])
+    setAddNewCountry([ newCountry])
   }
 
   return (
@@ -32,7 +42,7 @@ function App() {
       <Router>
 
         <VolunteerDash />
-        <UserEdit addDay={addDay} addNewDay={addNewDay} addTime={addTime} addNewTime={addNewTime}/>
+        <UserEdit addDay={addDay} addNewDay={addNewDay} addTime={addTime} addNewTime={addNewTime} addCountry={addCountry} addNewCountry={addNewCountry}/>
         {/* <Route exact path="/editprofile" component={UserEdit}/> */}
       
       <Login />
