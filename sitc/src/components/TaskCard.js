@@ -2,19 +2,38 @@ import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 const initialTask = {
     taskName:'',
-    taskDescriptiong:''
+    taskDescription:''
 }
 
-const TaskCard = () => {
+const StyledTask = styled.ul `
+display: flex;
+flex-direction:column;
+border:1px solid rgb(210, 210, 210);
+border-radius: 5px;
+box-shadow: 10px 8px 12px -2px rgb(128, 127, 197);
+margin: 8px;
+padding: 12px;
+background-color: white;
+width: 50%;
+margin-left: 25%;
+align: center;
+`
+const StyledButton = styled.button `
+width: 15%;
+margin-left: 40%;
+`
+
+const TaskCard = ({ task }) => {
   
     const history = useHistory();
-   // const { id } = useParams();
+    const { id } = useParams();
 
     const editTask = task => {
-       // history.push('/editTask')
+        history.push('/editTask')
     }
 
    
@@ -38,15 +57,13 @@ const TaskCard = () => {
     return(
         <div className='taskCard'> 
              <h2>Current Tasks</h2>
-                <ul>
-                     
-                    <li>we will map tasks from the backend and make a list using the taskId</li>
-                    <li>if admin wants to edit the task they will be pushed to the edit task or it will bring up the edit task component</li>
-                    <li>or it will bring up a form on this page to edit the task i'm undecided</li>
-                    <button onClick={editTask} >Edit Task</button>
-                    <button onClick={deleteTask} style={{backgroundColor: 'red',color:'white'}}>Delete</button>
+                <StyledTask>
+                    <li>Task Name : {task.taskName} </li>
+                    <li>Task Description : {task.taskDescription} </li>
+                    <StyledButton onClick={editTask} >Edit</StyledButton>
+                    <StyledButton onClick={deleteTask} style={{backgroundColor: 'red',color:'white'}}>Delete</StyledButton>
 
-                </ul>
+                </StyledTask>
         </div>
     )
 

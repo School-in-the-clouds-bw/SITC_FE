@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TaskCard from './TaskCard';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { getTasks } from '../Actions';
+import Loader from 'react-loader-spinner';
 
 const StyledNewTaskForm = styled.form `
 display: flex;
@@ -27,7 +30,7 @@ const initialFormValues = {
     taskDescription:''
 }
 
-export default function AdminDashboard() {
+const AdminDashboard = ({ isFetching, tasks, error, getTasks}) => {
 
     const [ expand, setExpand ] = useState(false);
     const [ fillOutForm, setFillOutForm ] = useState(initialFormValues);
@@ -35,24 +38,18 @@ export default function AdminDashboard() {
     const [ taskList, setTaskList ] = useState(initialFormValues);
     
 
-    const expandForm = e =>{
-        e.preventDefault();
-        setExpand(true);
-        setFillOutForm()
-    };
-
     const submitNewTask = e => {
         e.preventDefault();
         axiosWithAuth()
             .post('https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks', fillOutForm)
             .then( res => {
-                
+                console.log('this is the new task being submitted',res.data)
             })
         setExpand(false);
         setFillOutForm(initialFormValues);
     }
 
-    const getTasks = e => {
+  /*  const getTasks = e => {
         e.preventDefault();
         setShowTasks(true);
         axiosWithAuth()
@@ -62,9 +59,13 @@ export default function AdminDashboard() {
                 console.log('get tasks axios call res.data',res.data)
             })
             .catch( err => console.log('error getting task list ', err))
-    }
+    }*/
 
-    
+    const expandTasks = e => {
+        e.preventDefault();
+        setShowTasks(true);
+        getTasks();
+    }
 
    
 
@@ -72,7 +73,7 @@ export default function AdminDashboard() {
         <div >
             <h2>Admin Dashboard</h2>
         <button onClick={() => setExpand(true)}>Create New Task</button>
-        <button onClick={getTasks} >Edit Existing Task</button>
+        <button onClick={expandTasks} >Edit Existing Task</button>
         {expand && (
             <StyledNewTaskForm onSubmit={submitNewTask}>
                 <h2>Make A New Task</h2>
@@ -97,9 +98,11 @@ export default function AdminDashboard() {
         )}
         {showTasks && (
             <div className='tasks'>
-
-                 < TaskCard  taskList={taskList} updateTaskList={setTaskList} />
-                
+                { isFetching && <Loader type="Circles" color="#00bff" height={100} width={100} />}
+                {tasks.map(task => {
+                    return<TaskCard key={task.id} task={task} />
+                })}
+            
                     <button onClick={() => setShowTasks(false)}>Hide</button>
                     
             </div>
@@ -108,3 +111,16 @@ export default function AdminDashboard() {
     )
 
 };
+
+const mapStateToProps = state => {
+    return{
+        isFetching: state.isFetching,
+        tasks: state.tasks,
+        error: state.error
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    { getTasks })
+ (AdminDashboard);
