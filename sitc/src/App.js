@@ -15,6 +15,10 @@ import styled from 'styled-components';
 import StudentDash from './components/StudentDash';
 
 
+const StyledNav = styled.div `
+  display:flex;
+  justify-content: space-around;
+`
 
 function App() {
   const [addNewDay, setAddNewDay] = useState([]) 
@@ -37,17 +41,17 @@ const addCountry= (newCountry) => {
   return (
     <div className="App">
       <Router>
-
+        <StyledNav>
         <h1>Welcome to School In The Clouds</h1>
      
-      <Link to='/login'>Login</Link>
-      <Link  to='/signUp'>Sign Up</Link>
-      <Link to='/adminDashboard'>Admin Dashboard</Link>
-      <Link to='/volunteerDash'>Volunteer Dashboard</Link>
-      <Link to='/userEdit'>Volunteer Edit Profile</Link>
-      <Link to='/editTask'>Edit Task</Link>
-      <Link to='/studentDashboard'>Student Test</Link>
-      
+        <Link to='/login'>Login</Link>
+        <Link  to='/signUp'>Sign Up</Link>
+        <Link to='/adminDashboard'>Admin Dashboard</Link>
+        <Link to='/volunteerDash'>Volunteer Dashboard</Link>
+        <Link to='/userEdit'>Volunteer Edit Profile</Link>
+        <Link to='/editTask'>Edit Task</Link>
+        <Link to='/studentDashboard'>Student Dashboard</Link>
+      </StyledNav>
 
       <Switch>
         <PrivateRoute exact path='/volunteerDash' component={ VolunteerDash} />
