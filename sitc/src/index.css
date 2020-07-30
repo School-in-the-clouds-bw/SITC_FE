@@ -5,6 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color: #5a5a5a;
+  background-image: url(https://storage.needpix.com/rsynced_images/cloud-2695355_1280.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 
 code {

@@ -5,8 +5,9 @@ import styled from 'styled-components';
 const DeleteButton = styled.button`
   width: 100px;
   padding: 6px;
-  background-color: #E3A69F;
-  border: none;
+  background-color: #ccffe5;
+  border: 1px solid  #96534b;
+  color: #96534b;
   border-radius: 4px;
   font-size: 1.2rem;
   margin-top: 4.7%;
@@ -14,7 +15,9 @@ const DeleteButton = styled.button`
   
 
   &:hover {
-    filter:brightness(1.20);
+    background-color: #96534b;
+    color: #e3a69f;
+    border-color: #96534b;
   }
 `;
 

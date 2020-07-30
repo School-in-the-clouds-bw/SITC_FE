@@ -10,16 +10,41 @@ const Container = styled.div`
   width: 100%;
 `;
 
+const Headings = styled.h4 `
+
+`
+
 const FormContainer = styled.div`
   margin-bottom: 2%;
+  
 `;
 
 const Forms = styled.form`
   display: flex;
+  flex-direction: column;
+  margin-right: 32%;
+  
+`;
+const FormSection1 = styled.div `
+display: flex;
   flex-flow: column nowrap;
   align-items: center;
   margin: 1%;
+`
+const FormSection2 = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-right: 31%;
 `;
+
+const FormSection3 = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-right: 36%;
+`;
+
 
 const Cards = styled.div`
   margin: 1%;
@@ -28,28 +53,33 @@ const Cards = styled.div`
   border-radius: 8px;
   width: 80;
   padding: 3%;
-  background-color: #9fe2bf;
+  background-color: #ccffe5;
+  color: #96534b;
 `;
 const Button = styled.button`
   width: 150px;
   padding: 8px;
-  background-color: #e3a69f;
-  border: none;
+  background-color: #ccffe5;
+  color: #96534b;
+  border: 1px solid  #96534b;
   border-radius: 4px;
   font-size: 1.2rem;
   margin-top: 2%;
   height: 40px;
 
   &:hover {
-    filter: brightness(1.2);
+    background-color: #96534b;
+    color: #e3a69f;
+    border-color: #96534b;
   }
 `;
 
 const AddButton = styled.button`
   width: 60px;
   padding: 11px;
-  background-color: #e3a69f;
-  border: none;
+  background-color: #ccffe5;
+  border: 1px solid  #96534b;
+  color: #96534b;
   border-radius: 4px;
   font-size: 1.2rem;
   margin-top: 2%;
@@ -57,15 +87,18 @@ const AddButton = styled.button`
   height: 50px;
 
   &:hover {
-    filter: brightness(1.2);
+    background-color: #96534b;
+    color: #e3a69f;
+    border-color: #96534b;
   }
 `;
 
 const CancelButton = styled.button`
   width: 100px;
   padding: 11px;
-  background-color: #e3a69f;
-  border: none;
+  background-color: #ccffe5;
+  border: 1px solid  #96534b;
+  color: #96534b;
   border-radius: 4px;
   font-size: 1.2rem;
   margin-top: 2%;
@@ -73,12 +106,12 @@ const CancelButton = styled.button`
   height: 50px;
 
   &:hover {
-    filter: brightness(1.2);
+    background-color: #96534b;
+    color: #e3a69f;
+    border-color: #96534b;
   }
 `;
 const Label = styled.label`
-  text-align: center;
-  width: 38rem;
   font-size: 1.2rem;
 `;
 const Input = styled.input`
@@ -115,22 +148,22 @@ const Sections = styled.div`
 const CancelAdd = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-left: 30%;
-  margin-right: 42%;
+  margin-left: 20%;
+  margin-right: 21%;
 `;
 
 const CancelAdd1 = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-left: 25%;
-  margin-right: 47%;
+  margin-left: 5%;
+  margin-right: 35%;
 `;
 
 const CancelAdd2 = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-left: 24%;
-  margin-right: 48%;
+  margin-left: 4%;
+  margin-right: 37%;
 `;
 
 export default function UserEdit(props) {
@@ -194,10 +227,11 @@ export default function UserEdit(props) {
         <Cards>
           <Forms onSubmit={handleSubmit}>
             <Sections>
-            <h4>Country: </h4>
+            <Headings>Country: </Headings>
             {expandCountry && (
               <FormContainer>
-                <Label>Country</Label>
+                <FormSection1>
+                <Label>Country:</Label>
                 <Input
                   type="text"
                   name="country"
@@ -205,6 +239,7 @@ export default function UserEdit(props) {
                   value={info.country}
                   onChange={changeHandler}
                 />
+                </FormSection1>
                 <CancelAdd>
                   <AddButton onClick={submitCountry}>Add</AddButton>
                   <CancelButton onClick={() => setExpandCountry(false)}>
@@ -213,14 +248,15 @@ export default function UserEdit(props) {
                 </CancelAdd>
               </FormContainer>
             )}
-            <p>Stuff</p>
+          
             <AddCountry addNewCountry={props.addNewCountry} />
-            <Button onClick={() => setExpandCountry(true)}>Edit Country</Button>
+            <Button type="button" onClick={() => setExpandCountry(true)}>Edit Country</Button>
             </Sections>
             <Sections>
-            <h4>Day(s) Available: </h4>
+            <Headings>Day(s) Available: </Headings>
             {expandDay && (
               <FormContainer>
+                <FormSection2>
                 <Label>Days Available: </Label>
                 <Select
                   name="daysAvailable"
@@ -236,6 +272,7 @@ export default function UserEdit(props) {
                   <option value="Thursday">Thursday</option>
                   <option value="Friday">Friday</option>
                 </Select>
+                </FormSection2>
                 <CancelAdd1>
                   <AddButton onClick={submitDay}>Add</AddButton>
 
@@ -246,12 +283,13 @@ export default function UserEdit(props) {
               </FormContainer>
             )}
             <DayList addNewDay={props.addNewDay} />
-            <Button onClick={() => setExpandDay(true)}>Change Day</Button>
+            <Button type="button" onClick={() => setExpandDay(true)}>Change Day</Button>
             </Sections>
             <Sections>
-            <h4>Time(s) Available: </h4>
+            <Headings>Time(s) Available: </Headings>
             {expandTime && (
               <FormContainer>
+                <FormSection3>
                 <Label>Time Available: </Label>
                 <InputTime
                   type="text"
@@ -260,6 +298,7 @@ export default function UserEdit(props) {
                   value={info.timeAvailable}
                   onChange={changeHandler}
                 />
+                </FormSection3>
                 <CancelAdd2>
                   <AddButton onClick={submitTime}>Add</AddButton>
                   <CancelButton onClick={() => setExpandTime(false)}>
@@ -269,7 +308,7 @@ export default function UserEdit(props) {
               </FormContainer>
             )}
             <TimeList addNewTime={props.addNewTime} />
-            <Button onClick={() => setExpandTime(true)}>Set Time</Button>
+            <Button type="button" onClick={() => setExpandTime(true)}>Set Time</Button>
             </Sections>
           </Forms>
         </Cards>

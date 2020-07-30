@@ -1,14 +1,21 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import {useParams} from 'react-router-dom'
+import axiosWithAuth from "../utils/axiosWithAuth";
+import Loader from "react-loader-spinner";
+
 
 const Container = styled.div`
   width: 100%;
 `;
+
+const Title = styled.div `
+color: #96534b;
+`
 const Headings = styled.div`
   text-align: left;
   margin-left: 2%;
+  color: #96534b;
 `;
 const HeadingsPro = styled.div`
   text-align: left;
@@ -17,6 +24,7 @@ const HeadingsPro = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 96%;
+  color: #96534b;
 `;
 
 const Cards = styled.div`
@@ -26,8 +34,10 @@ const Cards = styled.div`
   border-radius: 8px;
   width: 80;
   padding: 3%;
-  background-color: #9fe2bf;
-`;
+  background-color: #ccffe5;
+  color: #96534b;
+  `
+
 const CardsProfile = styled.div`
   margin: 1%;
   box-shadow: 0 5px 10px rgba(104, 113, 88, 0.12),
@@ -35,7 +45,8 @@ const CardsProfile = styled.div`
   border-radius: 8px;
   width: 80;
   padding: 2%;
-  background-color: #9fe2bf;
+   background-color: #ccffe5;
+  color: #96534b;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -44,14 +55,17 @@ const CardsProfile = styled.div`
 const Button = styled.button`
   width: 140px;
   padding: 8px;
-  background-color: #9fe2bf;
-  border: none;
+  background-color: #ccffe5;
+  border: 1px solid  #96534b;
+  color: #96534b;
   border-radius: 4px;
   font-size: 1.5rem;
   margin-top: 2%;
 
   &:hover {
-    filter: brightness(1.2);
+    background-color: #96534b;
+    color: #e3a69f;
+    border-color: #96534b;
   }
 `;
 
@@ -67,13 +81,33 @@ const Descriptions = styled.div`
   flex-wrap: wrap;
 `;
 
+const Paragraph = styled.p `
+text-align: center;
+margin-left: 2%;
+`
+
 export default function VolunteerDash(props) {
+
   const id = window.localStorage.getItem('id')
+
+  const [seeTask, setSeeTask] = useState([])
+   
+  useEffect(() => {
+    const getData = () => {
+      axiosWithAuth()
+      .get("https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks")
+      .then(res => {
+        setSeeTask(res.data)
+      })
+      .catch(err => console.log(err))
+    }
+    getData()
+  })
   return (
     <Container>
-      <div className="title">
+      <Title>
         <h1>Hello User</h1>
-      </div>
+      </Title>
       <Headings>
         <h2>Tasks</h2>
       </Headings>
@@ -82,10 +116,25 @@ export default function VolunteerDash(props) {
           <h4>Task Name</h4>
           <h4>Task Description</h4>
         </Lists>
-        <Descriptions>
-          <p></p>
-          <p></p>
-        </Descriptions>
+       
+          {seeTask.map((task, key) => {
+            return(
+              <>
+              {props.fetchingData && (
+                <div className="key spinner">
+                  <Loader type="Puff" color="#96534b" height="60" width="60" />
+                  <p>Loading Data</p>
+                </div>
+              )} 
+              <Descriptions key={key}>
+                <Paragraph>{task.taskName}</Paragraph>
+                <Paragraph>{task.taskDescription}</Paragraph>
+              </Descriptions>
+              </>
+            )
+          })}
+          
+        
       </Cards>
       <HeadingsPro>
         <h2>Profile</h2>

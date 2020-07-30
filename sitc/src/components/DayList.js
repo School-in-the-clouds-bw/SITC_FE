@@ -4,15 +4,18 @@ import styled from "styled-components";
 const DeleteButton = styled.button`
   width: 100px;
   padding: 6px;
-  background-color: #e3a69f;
-  border: none;
+  background-color: #ccffe5;
+  border: 1px solid  #96534b;
+  color: #96534b;
   border-radius: 4px;
   font-size: 1.2rem;
   margin-top: 5%;
   height: 35px;
 
   &:hover {
-    filter: brightness(1.2);
+    background-color: #96534b;
+  color: #e3a69f;
+  border-color: #96534b;
   }
 `;
 
