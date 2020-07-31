@@ -1,6 +1,21 @@
 import React from "react";
 import * as yup from "yup";
 import axios from "axios";
+import styled from "styled-components";
+
+const Form = styled.form `
+  background-color: #9fe2bf; 
+  width:50%;
+  padding: 2%;
+  display:flex;
+  justify-content: space-evenly;
+  margin-left: 25%;
+  text-align: left;
+`;
+
+const Input = styled.input `
+  padding-left: 20%;
+`;
 
 const SignUp = () => {
     const defaultState = {
@@ -68,12 +83,12 @@ const SignUp = () => {
 
 
     return (
-        <div>
+        <Form>
             <form onSubmit={submitHandler}>
-                <label htmlFor="name">Name:<input type="text" name="name" onChange={changeHandler} placeholder="Name"></input>{errors.length !== 0 && <p>{errors.name}</p>}</label>
-                <label htmlFor="username">Username:<input type="text" name="username" onChange={changeHandler} placeholder="Username"></input>{errors.length !== 0 && <p>{errors.name}</p>}</label>
-                <label htmlFor="email">Email:<input type="text" name="email" onChange={changeHandler} placeholder="Email"></input>{errors.length !== 0 && <p>{errors.email}</p>}</label>
-                <label htmlFor="password">Password:<input type="password" name="password" onChange={changeHandler} placeholder="Password"></input>{errors.length !== 0 && <p>{errors.password}</p>}</label>
+                <label htmlFor="name">Name: <Input type="text" name="name" onChange={changeHandler} placeholder="Name"></Input>{errors.length !== 0 && <p>{errors.name}</p>}</label>
+                <label htmlFor="username">Username: <Input type="text" name="username" onChange={changeHandler} placeholder="Username"></Input>{errors.length !== 0 && <p>{errors.name}</p>}</label>
+                <label htmlFor="email">Email: <Input type="text" name="email" onChange={changeHandler} placeholder="Email"></Input>{errors.length !== 0 && <p>{errors.email}</p>}</label>
+                <label htmlFor="password">Password: <Input type="password" name="password" onChange={changeHandler} placeholder="Password"></Input>{errors.length !== 0 && <p>{errors.password}</p>}</label>
                 <label htmlFor="role">Role: <select name="role" onChange={changeHandler}>
                     <option value="null">--Select Role--</option>
                     <option value="Student">Student</option>
@@ -83,7 +98,7 @@ const SignUp = () => {
 
                 <button name="submit" disabled={buttonDisabler}>Sign Up!</button>
             </form>
-                    </div>
+                    </Form>
     )
 }
 
