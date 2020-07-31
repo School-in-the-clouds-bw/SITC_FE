@@ -60,8 +60,20 @@ const addCountry= (newCountry) => {
         <PrivateRoute exact path='/adminDashboard' component={ AdminDashboard} />
         <Route exact path='/studentDashboard' component={ StudentDash} />
         <PrivateRoute exact path='/editTask' component={ EditTask } />
-        <PrivateRoute exact path='/userEdit' component={ UserEdit }  addDay={addDay} addNewDay={addNewDay}
-          addTime={addTime} addNewTime={addNewDay} addCountry={addCountry} addNewCountry={addNewCountry} />
+          <PrivateRoute
+          exact
+          path="/userEdit:id"
+          component={() => (
+            <UserEdit
+              addDay={addDay}
+              addNewDay={addNewDay}
+              addTime={addTime}
+              addNewTime={addNewTime}
+              addCountry={addCountry}
+              addNewCountry={addNewCountry}
+            />
+          )}
+        />
         <Route path='/login' component={Login} />
         <Route path='/signUp' component={ SignUp } />
       </Switch>
