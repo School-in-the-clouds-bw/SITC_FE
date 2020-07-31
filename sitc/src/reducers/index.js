@@ -32,15 +32,6 @@ export const reducer = (state = initialState, action ) => {
             return {
                 ...state
             }
-        case ADMIN_EDIT_TASK:
-            return{
-                ...state,
-            }
-        case SET_TASK_TO_EDIT:
-            return{
-                ...state,
-                taskToEdit: action.payload
-            }
         default:
             return state;
     }
