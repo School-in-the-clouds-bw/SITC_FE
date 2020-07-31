@@ -4,7 +4,9 @@ import {axiosWithAuth} from '../utils/axiosWithAuth'
 export const FETCHING_ADMINTASKS_START = "FETCHING_ADMINTASKS_START";
 export const FETCHING_ADMINTASKS_SUCCESS = "FETCHING_ADMINTASKS_SUCCESS";
 export const FETCHING_ADMINTASKS_FAILURE = "FETCHING_ADMINTASKS_FAILURE";
-export const ADMIN_DELETE_TASK = "ADMIN_DELETE_TASK"
+export const ADMIN_DELETE_TASK = "ADMIN_DELETE_TASK";
+export const ADMIN_EDIT_TASK = "ADMIN_EDIT_TASK";
+export const SET_TASK_TO_EDIT = "SET_TASK_TO_EDIT"
 
 export const getTasks = () => dispatch => {
     dispatch({ type: FETCHING_ADMINTASKS_START });
@@ -26,3 +28,18 @@ export const deleteTaskData = taskToDelete => dispatch => {
     })
     .catch( err => console.log('error deleting task', err))
 };
+
+export const editTaskInfo = taskToEdit => dispatch => {
+    axiosWithAuth()
+    .put(`https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks/${taskToEdit.id}`, taskToEdit)
+    .then( res => {
+       console.log('edited task info',res.data)
+       dispatch({ type: ADMIN_EDIT_TASK, payload: res.data})
+    })
+    .catch( err => console.log('problem saving edited task',err))
+}
+
+export const setTaskToEdit = taskToEdit => {
+    console.log(taskToEdit)
+    return{ type: SET_TASK_TO_EDIT, payload: taskToEdit}
+}
