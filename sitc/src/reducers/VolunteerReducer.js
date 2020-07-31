@@ -2,17 +2,20 @@ import {
   FETCHING_VOLUNTEERTASKS_START,
   FETCHING_VOLUNTEERTASKS_SUCCESS,
   FETCHING_VOLUNTEERTASKS_FAILURE,
-} from "../Actions/VolunteerTaskActions";
+  FETCHING_VOLUNTEERPROFILE_START,
+  FETCHING_VOLUNTEERPROFILE_SUCCESS,
+  FETCHING_VOLUNTEERPROFILE_FAILURE
+} from "../Actions/VolunteerActions";
 
 const initialState = {
-  loading: false,
   tasks: [],
   isFetching: false,
-  error: "",
-  didFetch: false,
+  err: "",
+  profile: {}
+  
 };
 
-export const userEditReducer = (state = initialState, action) => {
+export const volunteerTaskReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCHING_VOLUNTEERTASKS_START:
       return {
@@ -25,15 +28,15 @@ export const userEditReducer = (state = initialState, action) => {
         ...state,
         tasks: action.payload,
         isFetching: false,
-        didFetch: true,
+        
       };
     case FETCHING_VOLUNTEERTASKS_FAILURE:
       return {
         ...state,
         isFetching: false,
-        didFetch: false,
-        error: "error retrieving volunteer tasks",
+        err: "error retrieving volunteer tasks",
       };
+
     default:
       return state;
   }

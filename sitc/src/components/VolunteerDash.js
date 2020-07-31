@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import Loader from "react-loader-spinner";
-import {getVolunteerTasks} from '../Actions/VolunteerTaskActions';
+
+
+import {getVolunteerTasks} from '../Actions/VolunteerActions';
 import {connect} from 'react-redux';
 
 const Container = styled.div`
@@ -13,6 +14,7 @@ const Container = styled.div`
 const Title = styled.div`
   color: #96534b;
 `;
+
 const Headings = styled.div`
   text-align: left;
   margin-left: 2%;
@@ -26,6 +28,7 @@ const HeadingsPro = styled.div`
   justify-content: space-between;
   width: 96%;
   color: #96534b;
+  
 `;
 
 const Cards = styled.div`
@@ -33,7 +36,7 @@ const Cards = styled.div`
   box-shadow: 0 5px 10px rgba(104, 113, 88, 0.12),
     0 5px 2px rgba(104, 113, 88, 0.24);
   border-radius: 8px;
-  width: 80;
+  
   padding: 3%;
   background-color: #ccffe5;
   color: #96534b;
@@ -44,7 +47,6 @@ const CardsProfile = styled.div`
   box-shadow: 0 5px 10px rgba(104, 113, 88, 0.12),
     0 5px 2px rgba(104, 113, 88, 0.24);
   border-radius: 8px;
-  width: 80;
   padding: 2%;
   background-color: #ccffe5;
   color: #96534b;
@@ -87,43 +89,34 @@ const Paragraph = styled.p`
   margin-left: 2%;
 `;
 
-export default function VolunteerDash(props) {
-  const id = window.localStorage.getItem("id");
-  const username = window.localStorage.getItem("username");
-  const [seeTask, setSeeTask] = useState([]);
-  const [seeProfile, setSeeProfile] = useState({});
+const VolunteerDash = ({getVolunteerTasks, tasks}) => {
+
+  const id = window.localStorage.getItem("id")
+  const username = window.localStorage.getItem('username')
+
+  const [seeProfile, setSeeProfile] = useState({})
 
   useEffect(() => {
-    const getData = () => {
-      axiosWithAuth()
-        .get("https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks")
-        .then((res) => {
-          setSeeTask(res.data);
-        })
-        .catch((err) => console.log(err));
-    };
-    getData();
-    // getVolunteerTasks()
-  },[]);
+    getVolunteerTasks();
+  }, [])
 
   useEffect(() => {
     const getProfile = () => {
       axiosWithAuth()
-        .get(`https://school-in-the-cloud-be.herokuapp.com/api/auth/users/${id}`)
-        .then((res) => {
-          setSeeProfile({
-            ...res.data
-          });
+      .get(`https://school-in-the-cloud-be.herokuapp.com/api/auth/users/${id}`)
+      .then(res => {
+        setSeeProfile({
+          ...res.data
         })
-        .catch((err) => console.log(err));
-    };
-    getProfile();
-  },[id]);
-
+      })
+      .catch(err => console.log(err))
+    }
+    getProfile()
+  }, [id])
   return (
     <Container>
       <Title>
-        <h1>Hello {username}</h1>
+        <h1>Hi {username}!</h1>
       </Title>
       <Headings>
         <h2>Tasks</h2>
@@ -134,15 +127,10 @@ export default function VolunteerDash(props) {
           <h4>Task Description</h4>
         </Lists>
 
-        {seeTask.map((task, key) => {
+        {tasks && tasks.map((task, key) => {
           return (
             <>
-              {props.fetchingData && (
-                <div className="key spinner">
-                  <Loader type="Puff" color="#96534b" height="60" width="60" />
-                  <p>Loading Data</p>
-                </div>
-              )}
+              
               <Descriptions key={key}>
                 <Paragraph>{task.taskName}</Paragraph>
                 <Paragraph>{task.taskDescription}</Paragraph>
@@ -161,36 +149,22 @@ export default function VolunteerDash(props) {
         <p>Country: {seeProfile.country}</p>
         <p>Days Available: {seeProfile.daysAvailable}</p>
         <p>Times Available: {seeProfile.timeAvailable} </p>
-        {/* {seeProfile.map((profile, key) => {
-          return (
-            <>
-              {props.fetchingData && (
-                <div className="key spinner">
-                  <Loader type="Puff" color="#96534b" height="60" width="60" />
-                  <p>Loading Data</p>
-                </div>
-              )}
-              <div key={key}>
-                <h4>{profile.country}</h4>
-                <h4>{profile.daysAvailable} </h4>
-                <h4>{profile.timeAvailable} </h4>
-              </div>
-            </>
-          );
-        })} */}
       </CardsProfile>
     </Container>
   );
 }
 
-// const mapToStateProps = state => {
-//   return{
-//     tasks: state.task,
-//     isFetching: state.isFetching,
-//     error: state.error,
-//     didFetch: state.didFetch,
-//   }
-// }
+const mapToStateProps = state => {
+  console.log(state)
+  return{
+    tasks: state.tasks,
+    isFetching: state.isFetching,
+    error: state.error,
+    didFetch: state.didFetch
+  }
+}
+const mapDispatchToProps = {getVolunteerTasks}
 
-// connect(mapToStateProps, {getVolunteerTasks})
 
+
+export default connect(mapToStateProps, mapDispatchToProps) (VolunteerDash)
