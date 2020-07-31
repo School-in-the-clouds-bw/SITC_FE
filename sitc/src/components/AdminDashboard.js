@@ -14,7 +14,7 @@ border-radius: 5px;
 box-shadow: 10px 8px 12px -2px rgb(128, 127, 197);
 margin: 8px;
 padding: 12px;
-background-color: white;
+background-color:  #ccffe5;
 width: 50%;
 margin-left: 25%;
 align: center;
@@ -99,9 +99,9 @@ const AdminDashboard = ({ isFetching, tasks, error, getTasks}) => {
         {showTasks && (
             <div className='tasks'>
                 { isFetching && <Loader type="Circles" color="#00bfff" height={100} width={100} />}
-                {tasks.map(task => {
-                    return<TaskCard key={task.id} task={task} setShowTasks={setShowTasks} />
-                })}
+                
+                    <TaskCard tasks={tasks} setShowTasks={setShowTasks} />
+                
             
                     <button onClick={() => setShowTasks(false)}>Hide</button>
                     

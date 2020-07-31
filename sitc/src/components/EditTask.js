@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { editTaskInfo } from '../Actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const StyledEditTaskForm = styled.form `
     display: flex;
@@ -19,33 +23,24 @@ width: 15%;
 margin-left: 40%;
 `
 
-export default function EditTask (props) {
-    const [ changeTask, setChangeTask ] = useState({
-        taskName:'',
-        taskDescription:''
-    });
+const EditTask = (setTaskToEdit, taskToEdit ,task ) => {
+    
+    const history = useHistory();
+    const dispatch = useDispatch();
+   // const taskToEdit = useSelector(state => state.taskToEdit)
 
-    const onInputChange= e => {
-        setChangeTask({
-            ...changeTask,
+    const onInputChange = e => {
+        setTaskToEdit({
+            ...taskToEdit,
             [e.target.name]: e.target.value,
         })
-    };
+    };   
 
-    const saveEditedTask = e => {
-        e.preventDefault();
-        axiosWithAuth()
-        .put(`https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks/${props.task.id}`, changeTask)
-        .then( res => {
-            axiosWithAuth()
-            .get('https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks')
-            .then( res => {
-                props.updateTaskList(res.data)
-            })
-            .catch( err => console.log('error getting updated tasklist after edit',err))
-        })
-        .catch( err => console.log('problem saving edited task',err))
-    }
+  const saveEditedTask = e => {
+      console.log('taskToEdit from taskEditForm submit', taskToEdit)
+      dispatch(editTaskInfo(taskToEdit, taskToEdit.id))
+      history.push('/adminDashboard')
+  }
 
     return(
         <StyledEditTaskForm onSubmit={saveEditedTask}>
@@ -54,17 +49,19 @@ export default function EditTask (props) {
         <input 
             type='text'
             name='taskName'
-            value={changeTask.taskName}
+            value={taskToEdit.taskName}
             onChange={onInputChange}
             />
         <h4>Task Description</h4>
         <input 
             type='text'
             name='taskDescription'
-            value={changeTask.taskDescription}
-            onChange={onInputChange}
+            value={taskToEdit.taskDescription}
+            onChange={ onInputChange }
             />
         <StyledButton>Submit Changes</StyledButton>
         </StyledEditTaskForm>
     )
 };
+
+export default EditTask;

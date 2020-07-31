@@ -58,7 +58,7 @@ const addCountry= (newCountry) => {
         {/* <PrivateRoute exact path='/newUserEdit' component={ NewUserEdit} /> */}
         <PrivateRoute exact path='/userEdit' component={ UserEdit} />
         <PrivateRoute exact path='/adminDashboard' component={ AdminDashboard} />
-        <Route exact path='/studentDashboard' component={ StudentDash} />
+        <PrivateRoute exact path='/studentDashboard' component={ StudentDash} />
         <PrivateRoute exact path='/editTask' component={ EditTask } />
           <PrivateRoute
           exact

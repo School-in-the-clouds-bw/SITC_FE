@@ -12,7 +12,7 @@ import logger from 'redux-logger';
 
 /***************** Chris create store  ************************************************/
 
-const store = createStore( reducer, applyMiddleware(thunk, logger))
+const store = createStore( reducer, applyMiddleware(logger, thunk))
 
 ReactDOM.render(
   <Provider store={store} >
