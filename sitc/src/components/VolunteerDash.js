@@ -118,7 +118,7 @@ export default function VolunteerDash(props) {
         .catch((err) => console.log(err));
     };
     getProfile();
-  },[]);
+  },[id]);
 
   return (
     <Container>

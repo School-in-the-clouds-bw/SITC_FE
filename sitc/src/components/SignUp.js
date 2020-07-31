@@ -36,7 +36,7 @@ const SignUp = () => {
       .min(7, "Password must be at least seven characters"),
     role: yup.string().required("Please Select Role").min(5),
     // terms: yup.boolean().oneOf([true], "Please Accept Terms and Conditions")
-    role: yup.string().required("Please Select Role").min(5),
+    // role: yup.string().required("Please Select Role").min(5),
   });
 
   const validateChange = (e) => {

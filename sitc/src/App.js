@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import VolunteerDash from "./components/VolunteerDash";
 import "./App.css";
 
@@ -20,22 +20,7 @@ const StyledNav = styled.div`
 `;
 
 function App() {
-  const [addNewDay, setAddNewDay] = useState([{daysAvailable: ""}]);
-  const [addNewTime, setAddNewTime] = useState([{ timeAvailable: ""}]);
-  const [addNewCountry, setAddNewCountry] = useState([{country: ""}]);
-
-  const addDay = (newDay) => {
-    setAddNewDay([...addNewDay, newDay]);
-  };
-
-  const addTime = (newTime) => {
-    setAddNewTime([...addNewTime, newTime]);
-  };
-
-  const addCountry = (newCountry) => {
-    setAddNewCountry([...addNewCountry, newCountry]);
-  };
-
+  
   return (
     <div className="App">
       <Router>
@@ -56,16 +41,7 @@ function App() {
           <PrivateRoute
             exact
             path="/userEdit/:id"
-            component={() => (
-              <UserEdit
-                addDay={addDay}
-                addNewDay={addNewDay}
-                addTime={addTime}
-                addNewTime={addNewTime}
-                addCountry={addCountry}
-                addNewCountry={addNewCountry}
-              />
-            )}
+            component={UserEdit}
           />
           <PrivateRoute
             exact

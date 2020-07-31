@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import DayList from "./DayList";
-import TimeList from "./TimeList";
 import styled from "styled-components";
-import AddCountry from "./AddCountry";
 import {useHistory } from "react-router-dom";
 
 const Container = styled.div`
@@ -76,25 +73,6 @@ const Button = styled.button`
   }
 `;
 
-const AddButton = styled.button`
-  width: 60px;
-  padding: 11px;
-  background-color: #ccffe5;
-  border: 1px solid  #96534b;
-  color: #96534b;
-  border-radius: 4px;
-  font-size: 1.2rem;
-  margin-top: 2%;
-  margin-bottom: 3%;
-  height: 50px;
-
-  &:hover {
-    background-color: #96534b;
-    color: #e3a69f;
-    border-color: #96534b;
-  }
-`;
-
 const CancelButton = styled.button`
   width: 100px;
   padding: 11px;
@@ -133,14 +111,6 @@ const InputTime = styled.input`
   font-size: 1rem;
 `;
 
-const Select = styled.select`
-  width: 270px;
-  padding: 8px 26px;
-  margin: 8.5px;
-  border: 1px solid #e3a69f;
-  border-radius: 4px;
-  font-size: 1rem;
-`;
 const Sections = styled.div`
   display: flex;
   justify-content: space-between;
@@ -168,7 +138,7 @@ const CancelAdd2 = styled.div`
   margin-right: 37%;
 `;
 
-export default function UserEdit(props) {
+export default function UserEdit() {
   const [info, setInfo] = useState({
     country: "",
     daysAvailable: "",
