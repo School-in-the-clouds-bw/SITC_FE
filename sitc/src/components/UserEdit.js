@@ -174,6 +174,7 @@ export default function UserEdit(props) {
     daysAvailable: "",
     timeAvailable: "",
   });
+
   const [expandCountry, setExpandCountry] = useState(false);
   const [expandDay, setExpandDay] = useState(false);
   const [expandTime, setExpandTime] = useState(false);
@@ -202,23 +203,23 @@ export default function UserEdit(props) {
       })
       .catch((err) => console.log(err));
   };
-  const submitDay = (e) => {
-    e.preventDefault();
-    props.addDay(info);
-    // setInfo({ daysAvailable: "" });
-  };
+  // const submitDay = (e) => {
+  //   e.preventDefault();
+  //   props.addDay(info);
+    
+  // };
 
-  const submitTime = (e) => {
-    e.preventDefault();
-    props.addTime(info);
-    // setInfo({ timeAvailable: "" });
-  };
+  // const submitTime = (e) => {
+  //   e.preventDefault();
+  //   props.addTime(info);
+    
+  // };
 
-  const submitCountry = (e) => {
-    e.preventDefault();
-    props.addCountry(info);
-    // setInfo({ country: "" });
-  };
+  // const submitCountry = (e) => {
+  //   e.preventDefault();
+  //   props.addCountry(info);
+    
+  // };
 
   console.log(info)
   return (
@@ -244,7 +245,7 @@ export default function UserEdit(props) {
                 />
                 </FormSection1>
                 <CancelAdd>
-                  <AddButton type="button" onClick={submitCountry}>Add</AddButton>
+                  {/* <AddButton type="button" onClick={submitCountry}>Add</AddButton> */}
                   <CancelButton onClick={() => setExpandCountry(false)}>
                     Cancel
                   </CancelButton>
@@ -252,7 +253,7 @@ export default function UserEdit(props) {
               </FormContainer>
             )}
           
-            <AddCountry addNewCountry={props.addNewCountry} />
+            {/* <AddCountry addNewCountry={props.addNewCountry} /> */}
             <Button type="button" onClick={() => setExpandCountry(true)}>Edit Country</Button>
             </Sections>
             <Sections>
@@ -261,7 +262,14 @@ export default function UserEdit(props) {
               <FormContainer>
                 <FormSection2>
                 <Label>Days Available: </Label>
-                <Select
+                <Input
+                  type="text"
+                  name="daysAvailable"
+                  placeholder="Enter Days Available"
+                  value={info.daysAvailable}
+                  onChange={changeHandler}
+                  />
+                {/* <Select
                   name="daysAvailable"
                   value={info.daysAvailable}
                   onChange={changeHandler}
@@ -274,10 +282,10 @@ export default function UserEdit(props) {
                   <option value="Wednesday">Wednesday</option>
                   <option value="Thursday">Thursday</option>
                   <option value="Friday">Friday</option>
-                </Select>
+                </Select> */}
                 </FormSection2>
                 <CancelAdd1>
-                  <AddButton type="button" onClick={submitDay}>Add</AddButton>
+                  {/* <AddButton type="button" onClick={submitDay}>Add</AddButton> */}
 
                   <CancelButton onClick={() => setExpandDay(false)}>
                     Cancel
@@ -285,7 +293,7 @@ export default function UserEdit(props) {
                 </CancelAdd1>
               </FormContainer>
             )}
-            <DayList addNewDay={props.addNewDay} />
+            {/* <DayList addNewDay={props.addNewDay} /> */}
             <Button type="button" onClick={() => setExpandDay(true)}>Change Day</Button>
             </Sections>
             <Sections>
@@ -303,14 +311,14 @@ export default function UserEdit(props) {
                 />
                 </FormSection3>
                 <CancelAdd2>
-                  <AddButton type="button" onClick={submitTime}>Add</AddButton>
+                  {/* <AddButton type="button" onClick={submitTime}>Add</AddButton> */}
                   <CancelButton onClick={() => setExpandTime(false)}>
                     Cancel
                   </CancelButton>
                 </CancelAdd2>
               </FormContainer>
             )}
-            <TimeList addNewTime={props.addNewTime} />
+            {/* <TimeList addNewTime={props.addNewTime} /> */}
             <Button type="button" onClick={() => setExpandTime(true)}>Set Time</Button>
             </Sections>
           </Forms>

@@ -32,7 +32,7 @@ export const userEditReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         didFetch: false,
-        error: "",
+        error: "error retrieving volunteer tasks",
       };
     default:
       return state;

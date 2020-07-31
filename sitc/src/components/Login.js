@@ -58,12 +58,13 @@ const Login = () => {
             window.localStorage.setItem('id', response.data.id)
             window.localStorage.setItem('token', response.data.token)
             window.localStorage.setItem('role', response.data.role)
+            window.localStorage.setItem('username', response.data.username)
             console.log(response)
             if (response.data.role == 'Administrator'){
-                history.push('/adminDashboard')
+                history.push('/adminDash')
             } else if (response.data.role == 'Volunteer'){
                 history.push('/volunteerDash')
-            } else if (response.data.student == 'Student'){
+            } else if (response.data.role == 'Student'){
                 history.push('/studentDash')
             }
         })

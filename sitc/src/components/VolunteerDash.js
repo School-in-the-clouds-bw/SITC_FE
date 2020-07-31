@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import Loader from "react-loader-spinner";
+import {getVolunteerTasks} from '../Actions/VolunteerTaskActions';
+import {connect} from 'react-redux';
 
 const Container = styled.div`
   width: 100%;
@@ -87,9 +89,10 @@ const Paragraph = styled.p`
 
 export default function VolunteerDash(props) {
   const id = window.localStorage.getItem("id");
-
+  const username = window.localStorage.getItem("username");
   const [seeTask, setSeeTask] = useState([]);
-  
+  const [seeProfile, setSeeProfile] = useState({});
+
   useEffect(() => {
     const getData = () => {
       axiosWithAuth()
@@ -100,12 +103,27 @@ export default function VolunteerDash(props) {
         .catch((err) => console.log(err));
     };
     getData();
-  });
+    // getVolunteerTasks()
+  },[]);
+
+  useEffect(() => {
+    const getProfile = () => {
+      axiosWithAuth()
+        .get(`https://school-in-the-cloud-be.herokuapp.com/api/auth/users/${id}`)
+        .then((res) => {
+          setSeeProfile({
+            ...res.data
+          });
+        })
+        .catch((err) => console.log(err));
+    };
+    getProfile();
+  },[]);
 
   return (
     <Container>
       <Title>
-        <h1>Hello User</h1>
+        <h1>Hello {username}</h1>
       </Title>
       <Headings>
         <h2>Tasks</h2>
@@ -140,10 +158,39 @@ export default function VolunteerDash(props) {
         </Link>
       </HeadingsPro>
       <CardsProfile>
-        <h4>Country: </h4>
-        <h4>Days Available: </h4>
-        <h4>Times Available: </h4>
+        <p>Country: {seeProfile.country}</p>
+        <p>Days Available: {seeProfile.daysAvailable}</p>
+        <p>Times Available: {seeProfile.timeAvailable} </p>
+        {/* {seeProfile.map((profile, key) => {
+          return (
+            <>
+              {props.fetchingData && (
+                <div className="key spinner">
+                  <Loader type="Puff" color="#96534b" height="60" width="60" />
+                  <p>Loading Data</p>
+                </div>
+              )}
+              <div key={key}>
+                <h4>{profile.country}</h4>
+                <h4>{profile.daysAvailable} </h4>
+                <h4>{profile.timeAvailable} </h4>
+              </div>
+            </>
+          );
+        })} */}
       </CardsProfile>
     </Container>
   );
 }
+
+// const mapToStateProps = state => {
+//   return{
+//     tasks: state.task,
+//     isFetching: state.isFetching,
+//     error: state.error,
+//     didFetch: state.didFetch,
+//   }
+// }
+
+// connect(mapToStateProps, {getVolunteerTasks})
+
