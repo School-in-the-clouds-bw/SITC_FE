@@ -14,7 +14,7 @@ border-radius: 5px;
 box-shadow: 10px 8px 12px -2px rgb(128, 127, 197);
 margin: 8px;
 padding: 12px;
-background-color: white;
+background-color:  #ccffe5;
 width: 50%;
 margin-left: 25%;
 align: center;
