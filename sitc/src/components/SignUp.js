@@ -9,6 +9,8 @@ const SignUp = () => {
         email: "",
         password: "",
         role: "",
+       // terms: false
+
     }
 
     const [formState, setFormState] = React.useState(defaultState);
@@ -21,7 +23,10 @@ const SignUp = () => {
         username: yup.string().required("Please Enter Username").min(3, "Username must be at least three characters"),
         email: yup.string().required("Please Enter Email").email("Please Enter Valid Email"),
         password: yup.string().required("Please Enter Password").min(7, "Password must be at least seven characters"),
+        role: yup.string().required("Please Select Role").min(5),
+       // terms: yup.boolean().oneOf([true], "Please Accept Terms and Conditions")
         role: yup.string().required("Please Select Role").min(5)
+
     })
 
     const validateChange = e => {
@@ -80,6 +85,8 @@ const SignUp = () => {
                     <option value="Volunteer">Volunteer</option>
                     <option value="Adminstrator">Administrator</option>
                 </select>{errors.length !== 0 && <p>{errors.role}</p>}</label>
+               {// <label htmlFor="terms"><input type="checkbox" name="terms" onChange={changeHandler} />I accept the Terms and Conditions </label>}
+}
 
                 <button name="submit" disabled={buttonDisabler}>Sign Up!</button>
             </form>

@@ -11,6 +11,7 @@ export const axiosWithAuth = () => {
             authorization: token,
         },
     });
-};
+}; 
 
-export default axiosWithAuth;
+export default axiosWithAuth;   
+
