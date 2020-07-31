@@ -154,6 +154,7 @@ const TaskCard = ({ tasks, setShowTasks }) => {
                     <DeleteWarning>
                     <h2>Are you sure you want to delete?</h2>
                     <button onClick={deleteTask} style={{backgroundColor: 'blue',color:'white'}} >yes delete</button>
+                    <button onClick={() => setOkayToDelete(false)}>Cancel</button>
                     </DeleteWarning>
                 )}
                 
