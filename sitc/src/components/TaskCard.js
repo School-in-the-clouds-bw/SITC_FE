@@ -12,7 +12,7 @@ const initialTask = {
     id:''
 }
 
-const StyledTask = styled.ul `
+const StyledTask = styled.div `
 display: flex;
 flex-direction:column;
 border:1px solid rgb(210, 210, 210);
@@ -116,17 +116,15 @@ const TaskCard = ({ tasks, setShowTasks }) => {
     return(
         <div className='taskCard'> 
              <h2>Current Tasks</h2>
-                <div >
+                
                     {tasks.map(task => ( <StyledTask>
-                         <li>Task Name : {task.taskName} </li>
-                         <li key={task.id} >Task Description : {task.taskDescription} </li>
+                         <h4>Task Name : {task.taskName} </h4>
+                         <h4 key={task.id} >Task Description : {task.taskDescription} </h4>
                          <StyledButton onClick={() => editTask(task)} >Edit</StyledButton>
                          <StyledButton onClick={() => verifyDelete(task)} 
                          style={{backgroundColor: 'red',color:'white'}}>Delete</StyledButton>
                          </StyledTask>
                     ))}
-                   
-                </div>
 
                 {edit && (
                     <StyledEditTaskForm onSubmit={saveEditedTask}>
