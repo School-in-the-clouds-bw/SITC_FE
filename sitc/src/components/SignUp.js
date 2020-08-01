@@ -1,6 +1,7 @@
 import React from "react";
 import * as yup from "yup";
 import axios from "axios";
+import { useHistory  } from 'react-router-dom';
 
 const SignUp = () => {
     const defaultState = {
@@ -13,6 +14,7 @@ const SignUp = () => {
 
     }
 
+    const history = useHistory();
     const [formState, setFormState] = React.useState(defaultState);
     const [errors, setErrors] = React.useState({...defaultState});
     const [newUser, setNewUser] = React.useState([]);
@@ -63,6 +65,7 @@ const SignUp = () => {
               .then(res => {
                 setNewUser([...newUser, res.data])
                 console.log(newUser)
+                history.push('/login')
               })
               .catch(err => console.log(err));
           };
