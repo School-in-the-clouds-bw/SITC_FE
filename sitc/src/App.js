@@ -40,7 +40,7 @@ function App() {
         {/* <Route exact path="/editprofile" component={UserEdit}/> */}
 =======
 const addCountry= (newCountry) => {
->>>>>>> 7c0bea23b0efccb7dbd971ebe3b70148efa8ce0e
+>>>>>>> 7c0bea23b0efccb7dbd971ebe3b70148efa8ce0egit
 
  setAddNewCountry([...addNewCountry, newCountry])
 }
