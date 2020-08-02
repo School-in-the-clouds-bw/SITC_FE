@@ -1,6 +1,9 @@
 import React from "react";
 import * as yup from "yup";
 import axios from "axios";
+
+import { useHistory  } from 'react-router-dom';
+
 import styled from "styled-components";
 
 const Form = styled.form `
@@ -17,6 +20,7 @@ const Input = styled.input `
   padding-left: 20%;
 `;
 
+
 const SignUp = () => {
     const defaultState = {
         name: "",
@@ -26,6 +30,7 @@ const SignUp = () => {
         role: "",
     }
 
+    const history = useHistory();
     const [formState, setFormState] = React.useState(defaultState);
     const [errors, setErrors] = React.useState({...defaultState});
     const [newUser, setNewUser] = React.useState([]);
@@ -73,6 +78,7 @@ const SignUp = () => {
               .then(res => {
                 setNewUser([...newUser, res.data])
                 console.log(newUser)
+                history.push('/login')
               })
               .catch(err => console.log(err));
           };
