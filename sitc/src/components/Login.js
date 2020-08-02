@@ -119,7 +119,11 @@ const Login = () => {
                 </label>
                 <label>
                     Password:
+
                     <Input type='text' name='password' onChange={handleChange} value={formState.password} />
+
+                    <input type='password' name='password' onChange={handleChange} value={formState.password} />
+
                 </label>
                 <Button type='submit' disabled={buttonDisabled}>Login</Button>
                 </form>

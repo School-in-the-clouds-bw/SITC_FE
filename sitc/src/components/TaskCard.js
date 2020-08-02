@@ -2,25 +2,103 @@ import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-
+import styled from 'styled-components';
+import { deleteTaskData, setTaskToEdit } from '../Actions'
+import { useDispatch } from 'react-redux';
+import  EditTask from '../components/EditTask';
 const initialTask = {
     taskName:'',
-    taskDescriptiong:''
+    taskDescription:'',
+    id:''
 }
 
-const TaskCard = () => {
-  
+const StyledTask = styled.div `
+display: flex;
+flex-direction:column;
+border:1px solid rgb(210, 210, 210);
+border-radius: 5px;
+box-shadow: 10px 8px 12px -2px rgb(128, 127, 197);
+margin: 8px;
+padding: 12px;
+background-color:  #ccffe5;
+width: 50%;
+margin-left: 25%;
+align: center;
+`
+const StyledButton = styled.button `
+width: 15%;
+margin-left: 40%;
+`
+
+const StyledEditTaskForm = styled.form `
+    display: flex;
+    flex-direction:column;
+    border:1px solid rgb(210, 210, 210);
+    border-radius: 5px;
+    box-shadow: 10px 8px 12px -2px rgb(128, 127, 197);
+    margin: 8px;
+    padding: 12px;
+    background-color:   #96534b;
+    width: 50%;
+    margin-left: 25%;
+`
+
+const DeleteWarning = styled.div `
+    background-color:red;
+    color: white;
+`
+
+const TaskCard = ({ tasks, setShowTasks }) => {
+    const dispatch = useDispatch();
     const history = useHistory();
-   // const { id } = useParams();
+    const [ taskToEdit, setTaskToEdit ] = useState(initialTask)
+    const [ edit, setEditing ] = useState()
+    const [ taskToDelete, setTaskToDelete] = useState(initialTask)
+    const [ okayToDelete, setOkayToDelete] = useState(false)
 
     const editTask = task => {
-       // history.push('/editTask')
+        setEditing(true)
+        setTaskToEdit(task)
+    };
+
+    const verifyDelete = task => {
+        setOkayToDelete(true)
+        setTaskToDelete(task)
+    }
+
+    const onInputChange = e => {
+        setTaskToEdit({
+            ...taskToEdit,
+            [e.target.name]: e.target.value,
+        })
+    };   
+
+    const saveEditedTask = e => {
+        e.preventDefault()
+        axiosWithAuth()
+        .put(`https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks/${taskToEdit.id}`, taskToEdit)
+        .then( res => {
+            console.log('task to edit',res.data)
+            const updateTasks = tasks.map((task) => {
+                return task.id === taskToEdit.id ? res.data : task;
+            })
+            setEditing(false)
+            setTaskToEdit(initialTask)
+            setShowTasks(false)
+        })
+        .catch(err => console.log('error editing task',err))
+       // dispatch(setTaskToEdit(task.id));
+      //  console.log('this is the task to be edited',task)
+        //history.push('/adminDashboard')
+
     }
 
    
 
     const deleteTask = e => {
-        e.preventDefault();
+        dispatch(deleteTaskData(taskToDelete.id))
+        console.log('this is the task id to be deleted',taskToDelete.id)
+       setShowTasks(false);
     /*    axiosWithAuth()
         .delete(`https://school-in-the-cloud-be.herokuapp.com/api/admin/tasks/${task.id}`)
         .then( res => {
@@ -38,15 +116,46 @@ const TaskCard = () => {
     return(
         <div className='taskCard'> 
              <h2>Current Tasks</h2>
-                <ul>
-                     
-                    <li>we will map tasks from the backend and make a list using the taskId</li>
-                    <li>if admin wants to edit the task they will be pushed to the edit task or it will bring up the edit task component</li>
-                    <li>or it will bring up a form on this page to edit the task i'm undecided</li>
-                    <button onClick={editTask} >Edit Task</button>
-                    <button onClick={deleteTask} style={{backgroundColor: 'red',color:'white'}}>Delete</button>
+                
+                    {tasks.map(task => ( <StyledTask>
+                         <h4>Task Name : {task.taskName} </h4>
+                         <h4 key={task.id} >Task Description : {task.taskDescription} </h4>
+                         <StyledButton onClick={() => editTask(task)} >Edit</StyledButton>
+                         <StyledButton onClick={() => verifyDelete(task)} 
+                         style={{backgroundColor: 'red',color:'white'}}>Delete</StyledButton>
+                         </StyledTask>
+                    ))}
 
-                </ul>
+                {edit && (
+                    <StyledEditTaskForm onSubmit={saveEditedTask}>
+                        <h2>Edit Task</h2>
+                        <h4>Task Name</h4>
+                        <input 
+                            type='text'
+                            name='taskName'
+                            value={taskToEdit.taskName}
+                            onChange={onInputChange}
+                            />
+                        <h4>Task Description</h4>
+                        <input 
+                            type='text'
+                            name='taskDescription'
+                            value={taskToEdit.taskDescription}
+                            onChange={onInputChange}
+                            />
+                            <StyledButton type="submit" >Submit Changes</StyledButton>
+                            <StyledButton onClick={() => setEditing(false)} >Cancel</StyledButton>
+                    </StyledEditTaskForm>
+                )}
+                
+                {okayToDelete && (
+                    <DeleteWarning>
+                    <h2>Are you sure you want to delete?</h2>
+                    <button onClick={deleteTask} style={{backgroundColor: 'blue',color:'white'}} >yes delete</button>
+                    <button onClick={() => setOkayToDelete(false)}>Cancel</button>
+                    </DeleteWarning>
+                )}
+               
         </div>
     )
 
