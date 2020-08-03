@@ -4,6 +4,42 @@ import * as yup from 'yup';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useHistory  } from 'react-router-dom';
 
+
+
+const FormContainer = styled.div `
+font-size: 1.2rem;
+background-color: #ccffe5;
+color: #96534b;
+box-shadow: rgba(104, 113, 88, 0.12) 0px 5px 10px, rgba(104, 113, 88, 0.24) 0px 5px 2px;
+width: 50%;
+background-color: rgb(159, 226, 191);
+align-items: center;
+margin-left: 25%;
+border-radius: 8px;
+`;
+
+const Input = styled.input `
+padding: 0.5em;
+border: none;
+border-radius: 3px;
+width: 25%;
+margin-bottom: 0.5em;
+margin-left: 0.5em;
+margin-right: 0.5em;
+`
+
+const Button = styled.button `
+font-size 1rem;
+margin: 5px;
+background-color: #ccffe5;
+color: #96534b;
+border-color: #96534b;
+&:hover {
+    background-color: #96534b;
+    color: #e3a69f;
+`;
+
+
 // const formSchema = yup.object().shape({
 //     username: yup.string().required().min(3, 'Invalid Username'),
 //     password: yup.string().string().email()    
@@ -75,21 +111,27 @@ const Login = () => {
 
 
         <div>
-            <form onSubmit={handleSubmit}>
+            <FormContainer>
+                <form onSubmit={handleSubmit}>
                 <label>
                     Username:
-                    <input type='text' name='username'onChange={handleChange}  value={formState.username}/>
+                    <Input type='text' name='username'onChange={handleChange}  value={formState.username}/>
                 </label>
                 <label>
                     Password:
+
+                    <Input type='text' name='password' onChange={handleChange} value={formState.password} />
+
                     <input type='password' name='password' onChange={handleChange} value={formState.password} />
+
                 </label>
-                <button type='submit' disabled={buttonDisabled}>Login</button>
-            </form>
-            
+                <Button type='submit' disabled={buttonDisabled}>Login</Button>
+                </form>
+                </FormContainer>
         </div>
     );
 };
+
 
 
 export default Login;

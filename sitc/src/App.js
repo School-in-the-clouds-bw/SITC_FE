@@ -3,11 +3,12 @@ import VolunteerDash from "./components/VolunteerDash";
 import "./App.css";
 
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+<<<<<<< HEAD
+=======
 // import NewUserEdit from './components/NewUserEdit';
+>>>>>>> 7c0bea23b0efccb7dbd971ebe3b70148efa8ce0e
 import UserEdit from './components/UserEdit'
 
-import Login from './components/Login'
-import AdminDashboard from './components/AdminDashboard';
 import EditTask from './components/EditTask';
 import PrivateRoute from './components/PrivateRoute';
 import SignUp from './components/SignUp';
@@ -35,7 +36,13 @@ function App() {
     setAddNewTime([...addNewTime, newTime])
   }
 
+<<<<<<< HEAD
+        <VolunteerDash />
+        <UserEdit addDay={addDay} addNewDay={addNewDay} addTime={addTime} addNewTime={addNewTime}/>
+        {/* <Route exact path="/editprofile" component={UserEdit}/> */}
+=======
 const addCountry= (newCountry) => {
+>>>>>>> 7c0bea23b0efccb7dbd971ebe3b70148efa8ce0egit
 
  setAddNewCountry([...addNewCountry, newCountry])
 }
@@ -53,7 +60,10 @@ const addCountry= (newCountry) => {
 
       <Switch>
         <PrivateRoute exact path='/volunteerDash' component={ VolunteerDash} />
+<<<<<<< HEAD
+=======
         {/* <PrivateRoute exact path='/newUserEdit' component={ NewUserEdit} /> */}
+>>>>>>> 7c0bea23b0efccb7dbd971ebe3b70148efa8ce0e
         <PrivateRoute exact path='/userEdit' component={ UserEdit} />
         <PrivateRoute exact path='/adminDashboard' component={ AdminDashboard} />
         <PrivateRoute exact path='/studentDashboard' component={ StudentDash} />
