@@ -3,7 +3,6 @@ import VolunteerDash from "./components/VolunteerDash";
 import "./App.css";
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-// import NewUserEdit from './components/NewUserEdit';
 import UserEdit from "./components/UserEdit";
 
 import Login from "./components/Login";
@@ -17,13 +16,9 @@ import StudentDash from "./components/StudentDash";
 const StyledNav = styled.div`
   display: flex;
   justify-content: space-around;
-
-`;
-
-  background-color:#ccffe5;
+  background-color: #ccffe5;
   padding-left: 32%;
-`
-
+`;
 
 function App() {
   
@@ -36,11 +31,6 @@ function App() {
 
           <Link to="/login">Login</Link>
           <Link to="/signUp">Sign Up</Link>
-          <Link to="/adminDashboard">Admin Dashboard</Link>
-          <Link to="/volunteerDash">Volunteer Dashboard</Link>
-          <Link to="/userEdit">Volunteer Edit Profile</Link>
-          <Link to="/editTask">Edit Task</Link>
-          <Link to="/studentDashboard">Student Dashboard</Link>
         </StyledNav>
 
         <Switch>
