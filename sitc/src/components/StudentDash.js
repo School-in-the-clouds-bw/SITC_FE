@@ -48,7 +48,7 @@ const StudentDash = () => {
 
     useEffect(()=>{axios.get("https://school-in-the-cloud-be.herokuapp.com/api/student/volunteers")
         .then(res=>{
-            const result = res.data.filter(tutor => tutor.daysAvailable.includes(query2));
+            const result = res.data.filter(tutor => tutor.daysAvailable.toLowerCase().includes(query2.toLowerCase()));
             setResults(result);
         })
         .catch (err=>{console.log(err)})

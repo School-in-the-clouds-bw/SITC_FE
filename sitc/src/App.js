@@ -17,7 +17,13 @@ import StudentDash from "./components/StudentDash";
 const StyledNav = styled.div`
   display: flex;
   justify-content: space-around;
+
 `;
+
+  background-color:#ccffe5;
+  padding-left: 32%;
+`
+
 
 function App() {
   
@@ -25,6 +31,7 @@ function App() {
     <div className="App">
       <Router>
         <StyledNav>
+
           <h1>Welcome to School In The Clouds</h1>
 
           <Link to="/login">Login</Link>
@@ -43,6 +50,7 @@ function App() {
             path="/userEdit/:id"
             component={UserEdit}
           />
+
           <PrivateRoute
             exact
             path="/adminDash"

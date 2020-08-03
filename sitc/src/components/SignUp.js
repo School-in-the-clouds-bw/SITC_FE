@@ -3,7 +3,27 @@ import * as yup from "yup";
 import axios from "axios";
 import {useHistory} from 'react-router-dom'
 
+import { useHistory  } from 'react-router-dom';
+
+import styled from "styled-components";
+
+const Form = styled.form `
+  background-color: #9fe2bf; 
+  width:50%;
+  padding: 2%;
+  display:flex;
+  justify-content: space-evenly;
+  margin-left: 25%;
+  text-align: left;
+`;
+
+const Input = styled.input `
+  padding-left: 20%;
+`;
+
+
 const SignUp = () => {
+
   const defaultState = {
     name: "",
     username: "",
@@ -144,6 +164,7 @@ const SignUp = () => {
           // <label htmlFor="terms"><input type="checkbox" name="terms" onChange={changeHandler} />I accept the Terms and Conditions </label>}
         }
 
+
         <button name="submit" disabled={buttonDisabler}>
           Sign Up!
         </button>
@@ -153,3 +174,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+       
