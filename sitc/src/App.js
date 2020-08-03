@@ -3,7 +3,6 @@ import VolunteerDash from "./components/VolunteerDash";
 import "./App.css";
 
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-// import NewUserEdit from './components/NewUserEdit';
 import UserEdit from "./components/UserEdit";
 
 import Login from "./components/Login";
@@ -27,6 +26,7 @@ function App() {
     <div className="App">
       <Router>
         <StyledNav>
+
           <h1>Welcome to School In The Clouds</h1>
 
           <Link to="/login">Login</Link>
@@ -40,6 +40,7 @@ function App() {
             path="/userEdit/:id"
             component={UserEdit}
           />
+
           <PrivateRoute
             exact
             path="/adminDash"

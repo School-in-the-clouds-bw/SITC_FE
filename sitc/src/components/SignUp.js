@@ -1,18 +1,35 @@
 import React from "react";
 import * as yup from "yup";
 import axios from "axios";
-import {useHistory} from 'react-router-dom'
+
+import { useHistory } from "react-router-dom";
+
+import styled from "styled-components";
+
+const Form = styled.form`
+  background-color: #9fe2bf;
+  width: 50%;
+  padding: 2%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 25%;
+  text-align: left;
+`;
+
+const Input = styled.input`
+  padding-left: 20%;
+`;
 
 const SignUp = () => {
   const defaultState = {
     name: "",
-    username: "",
+    password: "",
     email: "",
     password: "",
     role: "",
-    // terms: false
   };
-  const { push } = useHistory();
+
+  const history = useHistory();
   const [formState, setFormState] = React.useState(defaultState);
   const [errors, setErrors] = React.useState({ ...defaultState });
   const [newUser, setNewUser] = React.useState([]);
@@ -36,8 +53,6 @@ const SignUp = () => {
       .required("Please Enter Password")
       .min(7, "Password must be at least seven characters"),
     role: yup.string().required("Please Select Role").min(5),
-    // terms: yup.boolean().oneOf([true], "Please Accept Terms and Conditions")
-    // role: yup.string().required("Please Select Role").min(5),
   });
 
   const validateChange = (e) => {
@@ -70,64 +85,60 @@ const SignUp = () => {
     e.preventDefault();
     console.log("submitted");
     axios
-      .post(
-        "https://school-in-the-cloud-be.herokuapp.com/api/auth/register",
-        formState
-      )
+      .post("https://reqres.in/api/users", formState)
       .then((res) => {
         setNewUser([...newUser, res.data]);
         console.log(newUser);
-        push('/login')
+        history.push("/login");
       })
       .catch((err) => console.log(err));
   };
-  
 
   React.useEffect(() => {
     formSchema.isValid(formState).then((valid) => setDisabler(!valid));
   }, [formState]);
 
   return (
-    <div>
+    <Form>
       <form onSubmit={submitHandler}>
         <label htmlFor="name">
-          Name:
-          <input
+          Name:{" "}
+          <Input
             type="text"
             name="name"
             onChange={changeHandler}
             placeholder="Name"
-          ></input>
+          ></Input>
           {errors.length !== 0 && <p>{errors.name}</p>}
         </label>
         <label htmlFor="username">
-          Username:
-          <input
+          Username:{" "}
+          <Input
             type="text"
             name="username"
             onChange={changeHandler}
             placeholder="Username"
-          ></input>
+          ></Input>
           {errors.length !== 0 && <p>{errors.name}</p>}
         </label>
         <label htmlFor="email">
-          Email:
-          <input
+          Email:{" "}
+          <Input
             type="text"
             name="email"
             onChange={changeHandler}
             placeholder="Email"
-          ></input>
+          ></Input>
           {errors.length !== 0 && <p>{errors.email}</p>}
         </label>
         <label htmlFor="password">
-          Password:
-          <input
+          Password:{" "}
+          <Input
             type="password"
             name="password"
             onChange={changeHandler}
             placeholder="Password"
-          ></input>
+          ></Input>
           {errors.length !== 0 && <p>{errors.password}</p>}
         </label>
         <label htmlFor="role">
@@ -136,19 +147,16 @@ const SignUp = () => {
             <option value="null">--Select Role--</option>
             <option value="Student">Student</option>
             <option value="Volunteer">Volunteer</option>
-            <option value="Administrator">Administrator</option>
+            <option value="Adminstrator">Administrator</option>
           </select>
           {errors.length !== 0 && <p>{errors.role}</p>}
         </label>
-        {
-          // <label htmlFor="terms"><input type="checkbox" name="terms" onChange={changeHandler} />I accept the Terms and Conditions </label>}
-        }
 
         <button name="submit" disabled={buttonDisabler}>
           Sign Up!
         </button>
       </form>
-    </div>
+    </Form>
   );
 };
 
