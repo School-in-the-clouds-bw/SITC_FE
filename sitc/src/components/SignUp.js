@@ -85,7 +85,7 @@ const SignUp = () => {
     e.preventDefault();
     console.log("submitted");
     axios
-      .post("https://reqres.in/api/users", formState)
+      .post("https://school-in-the-cloud-be.herokuapp.com/api/auth/register", formState)
       .then((res) => {
         setNewUser([...newUser, res.data]);
         console.log(newUser);
@@ -147,7 +147,7 @@ const SignUp = () => {
             <option value="null">--Select Role--</option>
             <option value="Student">Student</option>
             <option value="Volunteer">Volunteer</option>
-            <option value="Adminstrator">Administrator</option>
+            <option value="Administrator">Administrator</option>
           </select>
           {errors.length !== 0 && <p>{errors.role}</p>}
         </label>
